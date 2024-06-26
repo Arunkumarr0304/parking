@@ -9,7 +9,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useFonts } from 'expo-font';
 import { Montserrat_600SemiBold, Montserrat_700Bold, Montserrat_500Medium, Montserrat_400Regular } from "@expo-google-fonts/montserrat";
 import Pagination from "../components/Pagination/Pagination";
-import { Roboto_400Regular, Roboto_500Medium } from "@expo-google-fonts/roboto";
+import { Roboto_400Regular, Roboto_500Medium, Roboto_700Bold } from "@expo-google-fonts/roboto";
 
 
 const { width } = Dimensions.get('window');
@@ -29,6 +29,7 @@ export default function App() {
    Montserrat_400Regular,
    Roboto_400Regular,
    Roboto_500Medium,
+   Roboto_700Bold,
   });
 
   const onLayoutRootView = useCallback(async () => {

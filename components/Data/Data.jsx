@@ -5,6 +5,10 @@ import Onboard3 from "../../assets/images/onboard_img3.png";
 import Google from "../../assets/images/Google.svg";
 import Apple from "../../assets/images/Apple.svg";
 
+import Parking1 from "../../assets/images/parking1.png";
+import Parking2 from "../../assets/images/parking2.png";
+import Parking3 from "../../assets/images/parking3.png";
+import Parking4 from "../../assets/images/parking4.png";
 
 export const pages = [
     {
@@ -43,3 +47,57 @@ export const log_methods = [
         text: 'Sign Up with Apple',
     },
 ]
+
+export const popular = [
+    {
+        id: 1,
+        image: Parking1,
+        rating: '4.9',
+        parking: 'Car Parking',
+        name: 'ParkSecure',
+        price: '$5.00',
+        timing: ' /1hr',
+        timing2: '1 hour',
+        vehicle: '28 Spots',
+    },
+    {
+        id: 2,
+        image: Parking2,
+        rating: '4.9',
+        parking: 'Car Parking',
+        name: 'SpacePark',
+        price: '$5.00',
+        timing: ' /1hr',
+        timing2: '2 hour',
+        vehicle: '28 Spots',
+    },
+    {
+        id: 3,
+        image: Parking3,
+        rating: '4.9',
+        parking: 'Car Parking',
+        name: 'ParkZone',
+        price: '$5.00',
+        timing: ' /1hr',
+        timing2: '3 hour',
+        vehicle: '28 Spots',
+    },
+    {
+        id: 4,
+        image: Parking4,
+        rating: '4.9',
+        parking: 'Car Parking',
+        name: 'SpotSafe',
+        price: '$5.00',
+        timing: ' /1hr',
+        timing2: '1 hour',
+        vehicle: '28 Spots',
+    },
+]
+
+export const booking_heading = [
+    { id: 1, text: "Ongoing" },
+    { id: 2, text: "Completed" },
+    { id: 3, text: "Cancelled" },
+  ];
+  

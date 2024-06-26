@@ -4,6 +4,8 @@ import Back from "../../assets/images/Back.svg";
 import { router, Link } from "expo-router";
 import { Montserrat_700Bold } from '@expo-google-fonts/montserrat';
 import Search from "../../assets/images/search.svg";
+import Locate from "../../assets/images/Locate.svg";
+import { Roboto_400Regular, Roboto_500Medium } from '@expo-google-fonts/roboto';
 
 const Manual = () => {
 
@@ -19,6 +21,17 @@ const Manual = () => {
           </View>
         <TextInput style={[styles.input]} placeholder='Search' />
       </View>
+      <View style={styles.current_row}>
+        <Locate />
+        <Text style={styles.current_location}>Use my current Location</Text>
+      </View>
+      <Text style={styles.result}>Search Result</Text>
+      <View style={styles.row}>
+        <Locate />
+        <Text style={styles.location_head}>Golden Avenue</Text>
+        
+      </View>
+      <Text style= {styles.location}>5484 preston Rd. Ingl..</Text>
     </View>
   )
 }
@@ -30,6 +43,7 @@ const styles = StyleSheet.create({
         paddingTop: 50,
         paddingHorizontal: 20,
         backgroundColor: '#ffffff',
+        paddingBottom: 500,
     },
     header: {
         flexDirection: 'row',
@@ -59,4 +73,44 @@ const styles = StyleSheet.create({
         bottom: 18,
         left: 10,
       },
+      current_row: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 16,
+        paddingVertical: 15,
+        borderBottomWidth: 1,
+        borderBottomColor: '#BABABA',
+      },
+      current_location: {
+        fontSize: 16,
+        lineHeight: 26,
+        fontFamily: 'Roboto_400Regular',
+        color: '#121212',
+      },
+      result: {
+        fontSize: 18,
+        lineHeight: 28, 
+        fontFamily: 'Montserrat_700Bold',
+        color: '#757575',
+        textTransform: 'capitalize',
+        paddingVertical: 16,
+      },
+      row: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 14,
+      },
+      location_head: {
+        fontSize: 16,
+        lineHeight: 26,
+        fontFamily: 'Roboto_500Medium',
+        color: '#121212',
+      },
+      location: {
+        fontSize: 16,
+        lineHeight: 26,
+        fontFamily: 'Roboto_400Regular',
+        color: '#757575',
+        paddingVertical: 7,
+      }
 })

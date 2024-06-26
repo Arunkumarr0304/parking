@@ -7,6 +7,11 @@ import Button from '../../components/Button/Button';
 import { router, Link } from "expo-router";
 
 const Location = () => {
+
+    const home = () => {
+        router.push('home');
+    };
+
     const manual = () => {
         router.push('manual_location');
     }
@@ -18,7 +23,7 @@ const Location = () => {
             <Text style={styles.content_text}>We need to know location in order to suggest near by  services.</Text>
         </View>
         <View style={styles.button_container}>
-            <Button buttonText="Allow Location Access" />
+            <Button buttonText="Allow Location Access" onPress={home} />
             <Button buttonText="Enter Location Manually" textColor="#FF95AE" borderColor="#FF95AE" backgroundColor="transparent" onPress={manual} />
         </View>
     </View>

@@ -38,12 +38,16 @@ const Login = () => {
   const verify = () => {
     router.push('verification');
   };
+  const location = () => {
+    router.push('location');
+  };
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>Login Account</Text>
+      <ScrollView showsVerticalScrollIndicator={false}>
       <Text style={styles.head_text}>Login to access your personalized music collection and playlists anytime, anywhere.</Text>
       <View style={styles.inputContainer}>
-        <View style={styles.inputBox}>
+        <View style={styles.mail_inputBox}>
           <Text style={styles.label}>Email Or Phone Number</Text>
           <View style={styles.inputWrapper}>
             <TextInput style={styles.input} placeholder='minatonamikaze@gmail.com' />
@@ -77,6 +81,7 @@ const Login = () => {
         }
       </View>
       <Text style={[styles.bottom_text]}>Don’t have an account yet?<Link href='/create_account' style={styles.link} > Register</Link></Text>
+      </ScrollView>
       <Modal
         transparent={true}
         visible={modalvisible}
@@ -139,7 +144,7 @@ const Login = () => {
                 </View>
               </View>
             </View>
-            <Button buttonText="continue" />
+            <Button buttonText="continue" onPress={location} />
           </View>
         </View>
       </Modal>
@@ -171,6 +176,9 @@ const styles = StyleSheet.create({
   inputContainer: {
     gap: 16,
     marginBottom: 26,
+  },
+  mail_inputBox: {
+    gap: 10,
   },
   inputBox: {
     gap: 10,
