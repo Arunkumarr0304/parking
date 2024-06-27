@@ -12,6 +12,8 @@ import Heart from "../../assets/images/empty_heart.svg";
 import HeartFilled from "../../assets/images/filled_heart.svg";
 import Car from "../../assets/images/car.svg";
 import Clock from "../../assets/images/clock.svg";
+import { router, Link } from "expo-router";
+
 
 const Home = () => {
   const [wishlist, setWishlist] = useState([]);
@@ -26,7 +28,9 @@ const Home = () => {
 
   
   console.log(popular);
-
+const details = () => {
+  router.push('parking_details');
+};
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -58,7 +62,7 @@ const Home = () => {
       <ScrollView horizontal={true} style={styles.horizontal_scroll}>
         <View style={styles.popular_container}>
           {popular.map((d) => (
-            <TouchableOpacity style={styles.popular_box} key={d.id}>
+            <TouchableOpacity style={styles.popular_box} key={d.id} onPress={details}>
               <Image source={d.image} alt='image' style={styles.image} />
               <View style={styles.top_row}>
                 <View style={styles.rating_row}>
@@ -97,7 +101,7 @@ const Home = () => {
       <View style={styles.stack_container}>
         {
           popular.map((d) =>(
-            <TouchableOpacity style={styles.stack} key={d.id}>
+            <TouchableOpacity style={styles.stack} key={d.id} onPress={details}>
               <Image source={d.image} style={styles.stack_img} alt='image' />
               <View style={styles.stack_body}>
                 <View style={styles.stack_body_row}>

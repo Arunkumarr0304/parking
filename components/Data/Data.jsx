@@ -10,6 +10,20 @@ import Parking2 from "../../assets/images/parking2.png";
 import Parking3 from "../../assets/images/parking3.png";
 import Parking4 from "../../assets/images/parking4.png";
 
+import Car1 from "../../assets/images/car1.svg";
+import Car2 from "../../assets/images/car2.svg";
+import Car3 from "../../assets/images/car3.svg";
+import Car4 from "../../assets/images/car4.svg";
+import Car5 from "../../assets/images/car5.svg";
+import Car6 from "../../assets/images/car6.svg";
+
+import Clock from "../../assets/images/clock.svg";
+import Car from "../../assets/images/car.svg";
+import Ticket from "../../assets/images/ticket.svg";
+
+import Paypal from '../../assets/images/paypal.svg';
+import Phonepay from '../../assets/images/phonepay.svg';
+
 export const pages = [
     {
         id: 1,
@@ -257,3 +271,153 @@ export const booking_heading = [
     { id: 3, text: "Cancelled" },
   ];
   
+
+  export const tab_heading = [
+    { id: 1, text: "About" },
+    { id: 2, text: "Gallery" },
+    { id: 3, text: "Review" },
+  ];
+  
+
+  
+export const time_tab = [
+    {
+        id: 1,
+        time: '08:00 AM',
+    },
+    {
+        id: 2,
+        time: '08:30 AM',
+    },
+    {
+        id: 3,
+        time: '09:00 AM',
+    },
+    {
+        id: 4,
+        time: '11:30 AM',
+    },
+    {
+        id: 5,
+        time: '12:30 AM',
+    },
+    {
+        id: 6,
+        time: '02:00 PM',
+    },
+    {
+        id: 7,
+        time: '06:00 PM',
+    },
+    {
+        id: 8,
+        time: '10:00 PM',
+    },
+
+]
+
+
+export const vehicle_data = [
+    {
+        id: 1,
+        image: <Car1 />,
+        company: 'Audi',
+        modal: 'Sedan',
+        modalno: 'GR 123-ABCD',
+    },
+    {
+        id: 2,
+        image: <Car2 />,
+        company: 'Toyota Fortuner',
+        modal: 'SUV',
+        modalno: 'GR 123-ABCD',
+    },
+    {
+        id: 3,
+        image: <Car3 />,
+        company: 'Hyunndai Verna',
+        modal: 'Sedan',
+        modalno: 'GR 123-ABCD',
+    },
+    {
+        id: 4,
+        image: <Car4 />,
+        company: 'Toyota Innova',
+        modal: 'MPV',
+        modalno: 'GR 123-ABCD',
+    },
+    {
+        id: 5,
+        image: <Car5 />,
+        company: 'Ford Endeavour',
+        modal: 'SUV',
+        modalno: 'GR 123-ABCD',
+    },
+    {
+        id: 6,
+        image: <Car6 />,
+        company: 'Toyota Fortuner',
+        modal: 'SUV',
+        modalno: 'GR 123-ABCD',
+    },
+]
+
+
+export const review_data = [
+    {
+        id: 1,
+        icon: <Clock />,
+        text: 'Arriving Time',
+        value: '08:00 AM',
+    },
+    {
+        id: 2,
+        icon: <Clock />,
+        text: 'Exit Time',
+        value: '09:00 AM',
+    },
+    {
+        id: 3,
+        icon: <Car />,
+        text: 'Vehicle',
+        value: 'Toyota fortuner (SUV)',
+    },
+    {
+        id: 4,
+        icon: <Ticket />,
+        text: 'Slot',
+        value: '3 Ticket',
+    },
+]
+
+export const review_data2 = [
+    {
+        id: 1,
+        text: 'Amount',
+        value: '$62.00',
+    },
+    {
+        id: 2,
+        text: 'Total Hours',
+        value: '$2.50',
+    },
+    {
+        id: 3,
+        text: 'fees',
+        value: '$2.50',
+    },
+
+]
+
+export const pay_card = [
+    {
+        id: 1,
+        icon: <Paypal />,
+        text: 'PayPal',
+    },
+    {
+        id: 2,
+        icon: <Phonepay />,
+        text: 'phone pay',
+    }
+]
