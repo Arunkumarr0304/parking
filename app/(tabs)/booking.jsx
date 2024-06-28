@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Image } from 'react-native';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Back from "../../assets/images/Back.svg";
+import Dark_back from "../../assets/images/White_back.svg";
 import { Montserrat_400Regular, Montserrat_700Bold } from '@expo-google-fonts/montserrat';
 import { booking_heading, popular2 } from '../../components/Data/Data';
 import Star from "../../assets/images/Star.svg";
@@ -9,98 +10,130 @@ import HeartFilled from "../../assets/images/filled_heart.svg";
 import Car from "../../assets/images/car.svg";
 import Clock from "../../assets/images/clock.svg";
 import Button from '../../components/Button/Button';
+import { router, Link } from "expo-router";
+import ThemeContext from '../../theme/ThemeContext';
 
 const Booking = () => {
+  const { theme, darkMode, toggleTheme } = useContext(ThemeContext);
   const [activeHeading, setActiveHeading] = useState(booking_heading[0].id);
-  
+  const [data, setData] = useState(popular2);
+
   const handleHeadingPress = (id) => {
     setActiveHeading(id);
   };
 
+  const receipt = () => {
+    router.push('receipt');
+  };
+
+  const timer = () => {
+    router.push('timer');
+  };
+
+  const back = () => {
+    router.push('home');
+  };
+
+  const deleteStack = (id) => {
+    const filteredData = data.filter((item) => item.id !== id);
+    setData(filteredData);
+  };
+
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {backgroundColor: theme.background}]}>
       <View style={styles.header}>
-        <Back />
-        <Text style={styles.heading}>My Booking</Text>
+      <TouchableOpacity onPress={back}>
+       {darkMode? <Dark_back /> :  <Back />}
+       </TouchableOpacity>
+        <Text style={[styles.heading, {color: theme.color}]}>My Booking</Text>
       </View>
       
       <View style={styles.heading_container}>
-          {booking_heading.map((d) => (
-            <TouchableOpacity
-              key={d.id}
+        {booking_heading.map((d) => (
+          <TouchableOpacity
+            key={d.id}
+            style={[
+              styles.heading_box,
+              activeHeading === d.id && styles.active_heading_box,
+            ]}
+            onPress={() => handleHeadingPress(d.id)}
+          >
+            <Text
               style={[
-                styles.heading_box,
-                activeHeading === d.id && styles.active_heading_box,
+                styles.head_text,
+                activeHeading === d.id && styles.active_head_text,
               ]}
-              onPress={() => handleHeadingPress(d.id)}
             >
-              <Text
-                style={[
-                  styles.head_text,
-                  activeHeading === d.id && styles.active_head_text,
-                  
-                ]}
-              >
-                {d.text}
-              </Text>
-            </TouchableOpacity>
-          ))}
-        </View>
-        <ScrollView showsVerticalScrollIndicator={false}>
+              {d.text}
+            </Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+
+      <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.stack_container}>
-        {
-           popular2.filter((d) => d.headingId === activeHeading)
-           .map((d) => (
-            <TouchableOpacity style={styles.main_stack} key={d.id}>
+          {data.filter((d) => d.headingId === activeHeading).map((d) => (
+            <TouchableOpacity style={[styles.main_stack, {backgroundColor: theme.cardbg}]} key={d.id}>
               <View style={styles.stack}>
-              <Image source={d.image} style={styles.stack_img} alt='image' />
-              <View style={styles.stack_body}>
-                <View style={styles.stack_body_row}>
-                <Text style={styles.parking}>{d.parking}</Text>
-                <View style={styles.rating_row}>
-                  <Star />
-                  <Text style={styles.rating}>{d.rating}</Text>
-                </View>
-                </View>
-                <View style={styles.name_price2}>
-                  <Text style={styles.name}>{d.name}</Text>
-                  <Text style={styles.price}>{d.price}<Text style={styles.time}>{d.timing}</Text></Text>
-                </View>
-                <View style={styles.timing_car2}>
-                  <View style={styles.timing_row}>
-                    <Clock />
-                    <Text style={styles.timing}>{d.timing2}</Text>
+                <Image source={d.image} style={styles.stack_img} alt='image' />
+                <View style={styles.stack_body}>
+                  <View style={styles.stack_body_row}>
+                    <Text style={styles.parking}>{d.parking}</Text>
+                    <View style={styles.rating_row}>
+                      <Star />
+                      <Text style={styles.rating}>{d.rating}</Text>
+                    </View>
                   </View>
-                  <View style={styles.car_row}>
-                    <Car />
-                    <Text style={styles.car}>{d.vehicle}</Text>
+                  <View style={styles.name_price2}>
+                    <Text style={[styles.name, {color:theme.color}]}>{d.name}</Text>
+                    <Text style={styles.price}>{d.price}<Text style={styles.time}>{d.timing}</Text></Text>
+                  </View>
+                  <View style={styles.timing_car2}>
+                    <View style={styles.timing_row}>
+                      <Clock />
+                      <Text style={[styles.timing, {color:theme.color}]}>{d.timing2}</Text>
+                    </View>
+                    <View style={styles.car_row}>
+                      <Car />
+                      <Text style={[styles.car, {color:theme.color}]}>{d.vehicle}</Text>
+                    </View>
                   </View>
                 </View>
-              </View>
               </View>
               {d.headingId === 3 ? (
                 <Button buttonText={d.btn} />
               ) : (
                 <View style={styles.button_container}>
-                  <Button buttonText={d.btn1} borderColor="#FF95AE" textColor="#FF95AE" backgroundColor="#ffffff" />
-                  <Button buttonText={d.btn2} />
+                  <Button
+                    buttonText={d.btn1}
+                    borderColor="#FF95AE"
+                    textColor="#FF95AE"
+                    backgroundColor="#ffffff"
+                    onPress={
+                      d.btn1 === 'Timer' ? timer :
+                      d.btn1 === 'Delete' ? () => deleteStack(d.id) :
+                      back
+                    }
+                  />
+                  <Button buttonText={d.btn2} onPress={receipt} />
                 </View>
               )}
             </TouchableOpacity>
-          ))
-        }
-      </View>
+          ))}
+        </View>
       </ScrollView>
     </View>
-  )
+  );
 }
 
 export default Booking;
+
 
 const styles = StyleSheet.create({
   container: {
     paddingTop: 50,
     paddingHorizontal: 20,
+    backgroundColor: '#ffffff',
   },
   header: {
     flexDirection: 'row',
@@ -142,15 +175,18 @@ const styles = StyleSheet.create({
     color: '#007BFF',
   },
   stack_container: {
-    gap: 10,
+    gap: 15,
     paddingBottom: 150,
   },
   main_stack: {
     gap: 5,
+    backgroundColor: '#F6F6F6',
+    paddingBottom: 5,
+    borderRadius: 10, 
   },
   stack: {
-    backgroundColor: '#F6F6F6',
-    borderRadius: 10, 
+    
+    
     padding: 12,
     flexDirection: 'row',
   },
@@ -283,5 +319,6 @@ button_container: {
   flexDirection: 'row',
   alignItems: 'center',
   justifyContent: 'space-between',
+  paddingHorizontal: 5,
 }
 })

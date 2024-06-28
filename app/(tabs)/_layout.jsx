@@ -6,15 +6,18 @@ import Home from "../../assets/images/home.svg";
 import Explore from "../../assets/images/explore.svg";
 import Booking from "../../assets/images/booking.svg";
 import Favourite from "../../assets/images/heart.svg";
-import Profile from "../../assets/images/person.svg";
+import Profile from "../../assets/images/profile_icon2.svg";
 import Active_Home from "../../assets/images/active_home.svg";
 import Active_Explore from "../../assets/images/active_explore.svg";
 import Active_Booking from "../../assets/images/active_booking.svg";
 import Active_Favourite from "../../assets/images/active_heart.svg";
 import Active_Profile from "../../assets/images/active_person.svg";
+import ThemeContext from '../../theme/ThemeContext';
 
 const TabBarButton = ({ children, onPress, accessibilityState, title }) => {
   const isSelected = accessibilityState.selected;
+  const { theme } = useContext(ThemeContext);
+
   return (
     <TouchableOpacity
       onPress={onPress}
@@ -24,7 +27,7 @@ const TabBarButton = ({ children, onPress, accessibilityState, title }) => {
       ]}
     >
       {children}
-      <Text style={[styles.tabTitle, isSelected ? [styles.activeTabTitle] : null]}>
+      <Text style={[styles.tabTitle, isSelected ? styles.activeTabTitle : styles.tabTitle]}>
         {title}
       </Text>
     </TouchableOpacity>
@@ -32,17 +35,18 @@ const TabBarButton = ({ children, onPress, accessibilityState, title }) => {
 };
 
 const TabsLayout = () => {
+  const { theme } = useContext(ThemeContext);
   return (
-    <View style={[styles.container]}>
+    <View style={[styles.container, { backgroundColor: theme.background }]}>
       <Tabs
         screenOptions={({ route }) => ({
           tabBarShowLabel: false,
-          tabBarActiveTintColor: '#1C31A5',
-          tabBarInactiveTintColor: '#757575',
+          tabBarActiveTintColor: theme.color,
+          tabBarInactiveTintColor: theme.color2,
           tabBarButton: (props) => (
             <TabBarButton {...props} title={route.name} />
           ),
-          tabBarStyle: [styles.tabBar],
+          tabBarStyle: [styles.tabBar, { backgroundColor: theme.cardbg }],
           headerShown: false,
           tabBarIcon: ({ focused }) => {
             let IconComponent;
@@ -106,7 +110,6 @@ const TabsLayout = () => {
     </View>
   );
 };
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,

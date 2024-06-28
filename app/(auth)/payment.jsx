@@ -87,7 +87,7 @@ const back = () => {
                   {d.icon}
                   <Text style={styles.tab_text}>{d.text}</Text>
                 </View>
-                <CheckCircle size={24} color="#241353" checked={checkedStates[index]}  />
+                <CheckCircle size={24} color="#007BFF" checked={checkedStates[index]}  />
               </TouchableOpacity>
             ))
           }

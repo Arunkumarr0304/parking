@@ -24,6 +24,20 @@ import Ticket from "../../assets/images/ticket.svg";
 import Paypal from '../../assets/images/paypal.svg';
 import Phonepay from '../../assets/images/phonepay.svg';
 
+import Car8 from "../../assets/images/car8.png";
+
+import Profile1 from "../../assets/images/profile1.svg";
+import Profile2 from "../../assets/images/profile2.svg";
+import Profile3 from "../../assets/images/profile3.svg";
+import Profile4 from "../../assets/images/profile4.svg";
+import Profile5 from "../../assets/images/profile5.svg";
+
+import Dark_profile1 from "../../assets/images/dark_profile1.svg";
+import Dark_profile2 from "../../assets/images/dark_profile2.svg";
+import Dark_profile3 from "../../assets/images/dark_profile3.svg";
+import Dark_profile4 from "../../assets/images/dark_profile4.svg";
+import Dark_profile5 from "../../assets/images/dark_profile5.svg";
+
 export const pages = [
     {
         id: 1,
@@ -420,4 +434,267 @@ export const pay_card = [
         icon: <Phonepay />,
         text: 'phone pay',
     }
+]
+
+
+export const receipt_data = [
+    {
+        id: 1,
+        icon: <Clock />,
+        text: 'Arriving Time',
+        value: '08:00 AM',
+    },
+    {
+        id: 2,
+        icon: <Clock />,
+        text: 'Exit Time',
+        value: '09:00 AM',
+    },
+    {
+        id: 3,
+        icon: <Ticket />,
+        text: 'Slot',
+        value: 'A05 (1st Floor)',
+    },
+]
+
+export const receipt_data2 = [
+    {
+        id: 1,
+        text: 'Car',
+        value: 'Toyota fortuner (SUV)',
+    },
+    {
+        id: 2,
+        text: 'Car Number',
+        value: 'GR 456 -EFGH',
+    },
+    {
+        id: 3,
+        text: 'Parking',
+        value: 'SecurePark',
+    },
+]
+
+export const receipt_data3 = [
+    {
+        id: 1,
+        text: 'Price',
+        value: '$62.00',
+    },
+    {
+        id: 2,
+        text: 'Fees',
+        value: '$2.50',
+    },
+]
+
+
+export const timer_datas = [
+    {
+        id: 1,
+        text: 'Name',
+        text1: 'Vehicle Number Plate',
+        value: 'Minato Namikaza',
+        value2: 'GR 456-EFGH',
+    },
+    {
+        id: 2,
+        text: 'Parking',
+        text1: 'Parking Slot',
+        value: 'SpacePark',
+        value2: 'A05 (1st Floor)',
+    },
+    {
+        id: 3,
+        text: 'Arrive Time',
+        text1: 'Exit Time',
+        value: '08:00 AM',
+        value2: '09:00 AM',
+    },
+    {
+        id: 4,
+        text: 'Date',
+        text1: 'Total Payment',
+        value: '16 June',
+        value2: '$64.00',
+    },
+]
+
+
+export const extend_data = [
+    {
+        id: 1,
+        time: '30 Mins',
+    },
+    {
+        id: 2,
+        time: '1 Hour',
+    },
+    {
+        id: 3,
+        time: '2 Hour',
+    },
+    {
+        id: 4,
+        time: '3 Hour',
+    },
+    {
+        id: 5,
+        time: '4 Hour',
+    },
+    {
+        id: 6,
+        time: '5 Hour',
+    },
+]
+
+
+export const wallet_tab_data = [
+    {
+        id: 1,
+        name: 'Money Added to Wallet',
+        price: '+$500',
+        time: '03 October | 5:30 AM',
+        balance: 'Balance $15,000.00',
+    },
+    {
+        id: 2,
+        name: 'Booking No #23456',
+        price: '+$500',
+        time: '03 October | 5:30 AM',
+        balance: 'Balance $15,000.00',
+    },
+    {
+        id: 3,
+        name: 'Money Added to Wallet',
+        price: '+$500',
+        time: '03 October | 5:30 AM',
+        balance: 'Balance $15,000.00',
+    },
+    {
+        id: 4,
+        name: 'Booking No #23456',
+        price: '+$500',
+        time: '03 October | 5:30 AM',
+        balance: 'Balance $15,000.00',
+    },
+    {
+        id: 5,
+        name: 'Money Added to Wallet',
+        price: '+$500',
+        time: '03 October | 5:30 AM',
+        balance: 'Balance $15,000.00',
+    },
+    {
+        id: 6,
+        name: 'Booking No #23456',
+        price: '+$500',
+        time: '03 October | 5:30 AM',
+        balance: 'Balance $15,000.00',
+    },
+    {
+        id: 7,
+        name: 'Money Added to Wallet',
+        price: '+$500',
+        time: '03 October | 5:30 AM',
+        balance: 'Balance $15,000.00',
+    },
+]
+
+
+export const parking_slot_data = [
+    {
+        id: 1,
+        parking: Car8,
+    },
+    {
+        id: 2,
+        parking: 'A03',
+    },
+    {
+        id: 3,
+        parking: 'A05',
+    }
+]
+
+export const parking_slot_data2 = [
+    {
+        id: 1,
+        parking: 'A02',
+    },
+    {
+        id: 2,
+        parking: Car8,
+    },
+    {
+        id: 3,
+        parking: Car8,
+    }
+]
+
+export const parking_slot_data3 = [
+    {
+        id: 1,
+        parking: Car8,
+    },
+    {
+        id: 2,
+        parking: Car8,
+    },
+    {
+        id: 3,
+        parking: 'A11',
+    }
+]
+export const parking_slot_data4 = [
+    {
+        id: 1,
+        parking: 'A08',
+    },
+    {
+        id: 2,
+        parking: Car8,
+    },
+    {
+        id: 3,
+        parking: Car8,
+    }
+]
+
+
+
+
+export const profile_data = [
+    {
+        id: 1,
+        icon: <Profile1 />,
+        active_icon: <Dark_profile1 />,
+        name: 'Edit Profile',
+    },
+    {
+        id: 2,
+        icon: <Profile2 />,
+        active_icon: <Dark_profile2 />,
+        name: 'Your favorite songs',
+    },
+
+    {
+        id: 3,
+        icon: <Profile3 />,
+        active_icon: <Dark_profile3 />,
+        name: 'Dark Mode',
+    },
+    {
+        id: 4,
+        icon: <Profile4 />,
+        active_icon: <Dark_profile4 />,
+        name: 'Help & Support',
+    },
+    {
+        id: 5,
+        icon: <Profile5 />,
+        active_icon: <Dark_profile5 />,
+        name: 'Language',
+    },
 ]

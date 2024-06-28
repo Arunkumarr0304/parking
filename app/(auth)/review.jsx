@@ -47,6 +47,7 @@ const Review = () => {
                 </View>
               </View>
             </TouchableOpacity>
+            <View style={styles.receipt}>
             <Text style={styles.title}>your booking</Text>
             <View style={styles.review_container}>
               {
@@ -79,6 +80,7 @@ const Review = () => {
              <View style={styles.review_row}>
               <Text style={styles.value}>Total Price</Text>
               <Text style={styles.value}>$64.50</Text>
+             </View>
              </View>
              <View style={styles.button_box}>
              <Button buttonText="continue" onPress={pay} />
@@ -243,5 +245,10 @@ const styles = StyleSheet.create({
     button_box: {
       marginVertical: 25,
       paddingBottom: 40,
-    }
+    },
+    receipt: {
+      borderRadius: 10,
+      padding: 12,
+      backgroundColor: '#F6F6F6',
+    },
 })

@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, TouchableOpacity, Image, ScrollView, Dimensions } from 'react-native';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Map from "../../assets/images/map.png";
 import { Roboto_400Regular, Roboto_500Medium, Roboto_700Bold } from '@expo-google-fonts/roboto';
 import { Montserrat_600SemiBold, Montserrat_700Bold } from '@expo-google-fonts/montserrat';
@@ -9,8 +9,11 @@ import Heart from "../../assets/images/empty_heart.svg";
 import HeartFilled from "../../assets/images/filled_heart.svg";
 import Car from "../../assets/images/car.svg";
 import Clock from "../../assets/images/clock.svg";
+import ThemeContext from '../../theme/ThemeContext';
+import { router, Link } from "expo-router";
 
 const Explore = () => {
+  const { theme, darkMode, toggleTheme } = useContext(ThemeContext);
   const [wishlist, setWishlist] = useState([]);
 
   const toggleWishlist = (id) => {
@@ -21,13 +24,17 @@ const Explore = () => {
     }
   };
 
+  const details = () => {
+    router.push('parking_details');
+  };
+
   return (
     <View style={styles.explore_page}>
       <Image source={Map} style={styles.image} />
       <ScrollView horizontal={true} style={styles.horizontal_scroll}>
         <View style={styles.popular_container}>
           {popular.map((d) => (
-            <TouchableOpacity style={styles.popular_box} key={d.id}>
+            <TouchableOpacity style={[styles.popular_box, {backgroundColor: theme.cardbg}]} key={d.id} onPress={details}>
               <Image source={d.image} style={styles.images} />
               <View style={styles.top_row}>
                 <View style={styles.rating_row}>
@@ -41,17 +48,17 @@ const Explore = () => {
               <View style={styles.card_body}>
                 <Text style={styles.parking}>{d.parking}</Text>
                 <View style={styles.name_price}>
-                  <Text style={styles.name}>{d.name}</Text>
+                  <Text style={[styles.name, {color: theme.color}]}>{d.name}</Text>
                   <Text style={styles.price}>{d.price}<Text style={styles.time}>{d.timing}</Text></Text>
                 </View>
                 <View style={styles.timing_car}>
                   <View style={styles.timing_row}>
                     <Clock />
-                    <Text style={styles.timing}>{d.timing2}</Text>
+                    <Text style={[styles.timing, {color: theme.color}]}>{d.timing2}</Text>
                   </View>
                   <View style={styles.car_row}>
                     <Car />
-                    <Text style={styles.car}>{d.vehicle}</Text>
+                    <Text style={[styles.car, {color:theme.color}]}>{d.vehicle}</Text>
                   </View>
                 </View>
               </View>

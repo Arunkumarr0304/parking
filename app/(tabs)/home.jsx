@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, TouchableOpacity, TextInput, ScrollView, Image } from 'react-native';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Black from "../../assets/images/black_location.svg";
 import Notification from "../../assets/images/Notification.svg";
 import { Roboto_400Regular, Roboto_500Medium, Roboto_700Bold } from '@expo-google-fonts/roboto';
@@ -13,9 +13,11 @@ import HeartFilled from "../../assets/images/filled_heart.svg";
 import Car from "../../assets/images/car.svg";
 import Clock from "../../assets/images/clock.svg";
 import { router, Link } from "expo-router";
+import ThemeContext from '../../theme/ThemeContext';
 
 
 const Home = () => {
+  const { theme, darkMode, toggleTheme } = useContext(ThemeContext);
   const [wishlist, setWishlist] = useState([]);
 
   const toggleWishlist = (id) => {

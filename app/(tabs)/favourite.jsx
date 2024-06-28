@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Image } from 'react-native';
-import React from 'react';
+import React, { useContext } from 'react';
 import Back from "../../assets/images/Back.svg";
 import { Montserrat_600SemiBold, Montserrat_700Bold } from '@expo-google-fonts/montserrat';
 import { Roboto_400Regular, Roboto_500Medium, Roboto_700Bold } from '@expo-google-fonts/roboto';
@@ -9,20 +9,38 @@ import Heart from "../../assets/images/empty_heart.svg";
 import HeartFilled from "../../assets/images/filled_heart.svg";
 import Car from "../../assets/images/car.svg";
 import Clock from "../../assets/images/clock.svg";
-
+import { router, Link } from "expo-router";
+import Dark_back from "../../assets/images/White_back.svg";
+import ThemeContext from '../../theme/ThemeContext';
+import Locate from "../../assets/images/locate2.svg";
+import Dark_Locate from "../../assets/images/dark_locate2.svg";
 
 const Favourite = () => {
+
+  const { theme, darkMode, toggleTheme } = useContext(ThemeContext);
+
+  const back = () => {
+    router.push('home');
+  };
+
+  const details = () => {
+    router.push('parking_details');
+  };
+
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {backgroundColor: theme.background}]}>
       <View style={styles.header}>
-        <Back />
-        <Text style={styles.heading}>Favourite</Text>
+        <TouchableOpacity onPress={back}>
+       {darkMode? <Dark_back /> :  <Back />}
+       </TouchableOpacity>
+        <Text style={[styles.heading, {color: theme.color}]}>Favourite</Text>
       </View>
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.stack_container}>
         {
           popular.map((d) =>(
-            <TouchableOpacity style={styles.stack} key={d.id}>
+            <TouchableOpacity style={[styles.stack, {backgroundColor: theme.cardbg}]} key={d.id} onPress={details}>
+              <View style={styles.stack_inner}>
               <Image source={d.image} style={styles.stack_img} alt='image' />
               <View style={styles.stack_body}>
                 <View style={styles.stack_body_row}>
@@ -33,20 +51,27 @@ const Favourite = () => {
                 </View>
                 </View>
                 <View style={styles.name_price2}>
-                  <Text style={styles.name}>{d.name}</Text>
+                  <Text style={[styles.name, {color: theme.color}]}>{d.name}</Text>
                   <Text style={styles.price}>{d.price}<Text style={styles.time}>{d.timing}</Text></Text>
                 </View>
-                <View style={styles.timing_car2}>
+                <View style={styles.location_row}>
+                  {darkMode ?  <Dark_Locate /> : <Locate />}
+                  <Text style={styles.location_text}>New York, USA</Text>
+                </View>
+               
+              </View>
+              </View>
+              <View style={styles.hr}></View>
+              <View style={styles.timing_car2}>
                   <View style={styles.timing_row}>
                     <Clock />
-                    <Text style={styles.timing}>{d.timing2}</Text>
+                    <Text style={[styles.timing, {color:theme.color}]}>{d.timing2}</Text>
                   </View>
                   <View style={styles.car_row}>
                     <Car />
-                    <Text style={styles.car}>{d.vehicle}</Text>
+                    <Text style={[styles.car, {color: theme.color}]}>{d.vehicle}</Text>
                   </View>
                 </View>
-              </View>
             </TouchableOpacity>
           ))
         }
@@ -62,11 +87,13 @@ const styles = StyleSheet.create({
   container: {
     paddingTop: 50,
     paddingHorizontal: 20,
+    backgroundColor: '#ffffff',
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 60,
+    paddingBottom: 20,
   },
   heading: {
     fontSize: 24,
@@ -161,7 +188,6 @@ timing_car2: {
   alignItems: 'center',
   justifyContent: 'space-between',
   paddingTop: 8,
-  width: '80%',
 },
 timing_row: {
   flexDirection: 'row',
@@ -187,12 +213,15 @@ car: {
 },
 stack_container: {
   gap: 10,
-  paddingBottom: 50,
+  paddingBottom: 150,
 },
 stack: {
   backgroundColor: '#F6F6F6',
   borderRadius: 10, 
   padding: 12,
+  
+},
+stack_inner: {
   flexDirection: 'row',
 },
 stack_img: {
@@ -209,5 +238,22 @@ stack_body_row: {
   alignItems: 'center',
   justifyContent:'space-between',
   width: '80%',
-}
+},
+location_row: {
+  flexDirection: 'row',
+  alignItems: 'center',
+  gap: 10,
+},
+location_text: {
+  fontSize: 14,
+  lineHeight: 24,
+  fontFamily: 'Roboto_500Medium',
+  color: '#757575',
+},
+hr: {
+  borderBottomColor: '#BABABA',
+  borderBottomWidth: 1,
+  borderStyle: 'dashed',
+  marginVertical: 16,
+},
 })
