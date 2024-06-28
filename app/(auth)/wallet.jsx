@@ -1,38 +1,47 @@
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Image } from 'react-native';
-import React from 'react';
+import React, { useContext } from 'react';
 import Back from "../../assets/images/Back.svg";
+import Dark_back from "../../assets/images/White_back.svg";
 import { Montserrat_600SemiBold, Montserrat_700Bold } from '@expo-google-fonts/montserrat';
 import Wallets from "../../assets/images/pink_wallet.svg";
 import Button from '../../components/Button/Button';
 import { Roboto_400Regular } from '@expo-google-fonts/roboto';
 import { wallet_tab_data } from '../../components/Data/Data';
+import ThemeContext from '../../theme/ThemeContext';
+import { router, Link } from "expo-router";
 
 const Wallet = () => {
+    const { theme, darkMode, toggleTheme } = useContext(ThemeContext);
+    const back = () => {
+        router.push('extend_parking');
+      };
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {backgroundColor:theme.background}]}>
       <View style={styles.header}>
-        <Back />
-        <Text style={styles.heading}>Wallet</Text>
+      <TouchableOpacity onPress={back}>
+       {darkMode? <Dark_back /> :  <Back />}
+       </TouchableOpacity>
+        <Text style={[styles.heading, {color:theme.color}]}>Wallet</Text>
       </View>
-      <View style={styles.stack}>
+      <View style={[styles.stack, {backgroundColor:theme.cardbg}]}>
         <View style={styles.stack_top}>
             <View style={styles.stack_left}>
                 <Text style={styles.text}>Wallet Balance</Text>
-                <Text style={styles.value}>$ 15000.00</Text>
+                <Text style={[styles.value, {color:theme.color}]}>$ 15000.00</Text>
             </View>
             <Wallets />
         </View>
         <Button buttonText="Add Money" />
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
-      <Text style={styles.today}>Today</Text>
+      <Text style={[styles.today, {color:theme.color}]}>Today</Text>
       <View style={styles.wallet_tab_container}>
         {
             wallet_tab_data.map((d) => (
-                <TouchableOpacity style={styles.tab} key={d.id}>
+                <TouchableOpacity style={[styles.tab, {backgroundColor:theme.cardbg}]} key={d.id}>
                 <View style={styles.row}>
                     <View style={styles.column}>
-                        <Text style={styles.value2}>{d.name}</Text>
+                        <Text style={[styles.value2, {color:theme.color}]}>{d.name}</Text>
                         <Text style={styles.text}>{d.time}</Text>
                     </View>
                     <View style={styles.column}>

@@ -1,6 +1,7 @@
-import { StyleSheet, Text, View, Image } from 'react-native';
-import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView } from 'react-native';
+import React, { useState, useEffect, useContext } from 'react';
 import Back from "../../assets/images/Back.svg";
+import Dark_back from "../../assets/images/White_back.svg";
 import { Montserrat_600SemiBold, Montserrat_700Bold } from '@expo-google-fonts/montserrat';
 import Car from "../../assets/images/car7.png";
 import Donut from '../../components/Donut/Donut';
@@ -8,8 +9,10 @@ import { Roboto_400Regular, Roboto_700Bold } from '@expo-google-fonts/roboto';
 import { timer_datas } from '../../components/Data/Data';
 import Button from '../../components/Button/Button';
 import { router, Link } from "expo-router";
+import ThemeContext from '../../theme/ThemeContext';
 
 const Timer = () => {
+  const { theme, darkMode, toggleTheme } = useContext(ThemeContext);
   const [time, setTime] = useState(0);
 
   useEffect(() => {
@@ -29,12 +32,16 @@ const Timer = () => {
   const extend = () => {
     router.push('extend_parking');
   };
-
+  const back = () => {
+    router.push('booking');
+  };
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {backgroundColor:theme.background}]}>
       <View style={styles.header}>
-        <Back />
-        <Text style={styles.heading}>Parking Timer</Text>
+      <TouchableOpacity onPress={back}>
+       {darkMode? <Dark_back /> :  <Back />}
+       </TouchableOpacity>
+        <Text style={[styles.heading, {color:theme.color}]}>Parking Timer</Text>
       </View>
       <View style={styles.top_container}>
         <View style={styles.donutContainer}>
@@ -42,7 +49,7 @@ const Timer = () => {
           <Image source={Car} alt='image' style={styles.car} />
         </View>
         <View style={styles.timer_container}>
-          <Text style={styles.number}>{formatTime(time)}</Text>
+          <Text style={[styles.number, {color:theme.color}]}>{formatTime(time)}</Text>
         </View>
         <Text style={styles.text}>Remaining Parking Time</Text>
         <View style={styles.hr}></View>
@@ -53,11 +60,11 @@ const Timer = () => {
             <View style={styles.row} key={d.id}>
               <View style={styles.column}>
                 <Text style={styles.text}>{d.text}</Text>
-                <Text style={styles.value}>{d.value}</Text>
+                <Text style={[styles.value, {color:theme.color}]}>{d.value}</Text>
               </View>
               <View style={styles.column}>
                 <Text style={styles.text2}>{d.text1}</Text>
-                <Text style={styles.value2}>{d.value2}</Text>
+                <Text style={[styles.value2, {color:theme.color}]}>{d.value2}</Text>
               </View>
             </View>
           ))
@@ -75,6 +82,7 @@ export default Timer;
 const styles = StyleSheet.create({
   container: {
     paddingTop: 50,
+    paddingBottom: 60,
     paddingHorizontal: 20,
   },
   header: {

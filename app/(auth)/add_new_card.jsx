@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, ScrollView } from 'react-native';
 import React, { useContext } from 'react';
 import Back from "../../assets/images/Back.svg";
+import Dark_back from "../../assets/images/White_back.svg";
 import { Montserrat_600SemiBold, Montserrat_700Bold } from '@expo-google-fonts/montserrat';
 import Card from "../../assets/images/card_icon.svg";
 import Person from "../../assets/images/person.svg";
@@ -8,9 +9,10 @@ import Lock from "../../assets/images/lock.svg";
 import Calendar from "../../assets/images/calendar2.svg";
 import Button from '../../components/Button/Button';
 import { router, Link } from "expo-router";
+import ThemeContext from '../../theme/ThemeContext';
 
 const Add_new = () => {
-    
+    const { theme, darkMode, toggleTheme } = useContext(ThemeContext);
     const add_card = () => {
         router.push('payment');
     };
@@ -19,18 +21,18 @@ const Add_new = () => {
       };
     
   return (
-    <View style={[styles.container]}>
+    <View style={[styles.container, {backgroundColor:theme.background}]}>
         <View style={styles.header}>
         <TouchableOpacity onPress={back}>
-       <Back />
+        {darkMode? <Dark_back /> :  <Back />}
        </TouchableOpacity>
-            <Text style={[styles.heading]}>Add New Card</Text>
+            <Text style={[styles.heading, {color:theme.color}]}>Add New Card</Text>
         </View>
         <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.input_container}>
             <View style={styles.input_box}>
-                <Text style={[styles.label]}>Card Number</Text>
-                <TextInput style={[styles.input]}
+                <Text style={[styles.label, {color:theme.color}]}>Card Number</Text>
+                <TextInput style={[styles.input, {backgroundColor:theme.cardbg, color:theme.color}]}
                     placeholder='Card Number'
                     keyboardType= 'number-pad'
                 
@@ -40,8 +42,8 @@ const Add_new = () => {
                 </View>
             </View>
             <View style={styles.input_box}>
-                <Text style={[styles.label]}>user name</Text>
-                <TextInput style={[styles.input]} 
+                <Text style={[styles.label, {color:theme.color}]}>user name</Text>
+                <TextInput style={[styles.input, {backgroundColor:theme.cardbg, color:theme.color}]} 
                     placeholder='Minato Namikaze'
                 />
                 <View style={styles.icon}>
@@ -49,8 +51,8 @@ const Add_new = () => {
                 </View>
             </View>
             <View style={styles.input_box}>
-                <Text style={[styles.label]}>Expired</Text>
-                <TextInput style={[styles.input]}
+                <Text style={[styles.label, {color:theme.color}]}>Expired</Text>
+                <TextInput style={[styles.input, {backgroundColor:theme.cardbg, color:theme.color}]}
                 placeholder='MM/YY'
                 />
                 <View style={styles.icon}>
@@ -58,8 +60,8 @@ const Add_new = () => {
                 </View>
             </View>
             <View style={styles.input_box}>
-                <Text style={[styles.label]}>CVV</Text>
-                <TextInput style={[styles.input]}
+                <Text style={[styles.label, {color:theme.color}]}>CVV</Text>
+                <TextInput style={[styles.input, {backgroundColor:theme.cardbg, color:theme.color}]}
                     placeholder='CVV'
                 />
                 <View style={styles.icon}>

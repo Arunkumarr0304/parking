@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView, TextInput, Image, Modal } from 'react-native';
 import React, { useContext, useState } from 'react';
 import Back from "../../assets/images/Back.svg";
+import Dark_back from "../../assets/images/White_back.svg";
 import { Montserrat_400Regular, Montserrat_500Medium, Montserrat_600SemiBold, Montserrat_700Bold } from '@expo-google-fonts/montserrat';
 import Master from "../../assets/images/master.svg";
 import CheckCircle from "../../components/Check_Circle/Check_Circle";
@@ -12,9 +13,10 @@ import { pay_card } from '../../components/Data/Data';
 import { router, Link } from "expo-router";
 import Tick from "../../assets/images/payment_success.svg";
 import { Roboto_400Regular, Roboto_700Bold } from '@expo-google-fonts/roboto';
+import ThemeContext from '../../theme/ThemeContext';
 
 const Payment = () => {
- 
+  const { theme, darkMode, toggleTheme } = useContext(ThemeContext);
   const [checked, setChecked] = useState(false);
   const [checkedStates, setCheckedStates] = useState(Array(pay_card.length).fill(false));
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -46,20 +48,20 @@ const back = () => {
 };
 
   return (
-    <View style={[styles.container]}>
+    <View style={[styles.container, {backgroundColor:theme.background}]}>
       <View style={styles.header}>
       <TouchableOpacity onPress={back}>
-         <Back />
+       {darkMode? <Dark_back /> :  <Back />}
        </TouchableOpacity>
-        <Text style={[styles.heading]}>Payment Method</Text>
+        <Text style={[styles.heading, {color:theme.color}]}>Payment Method</Text>
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.card_header}>
           <View style={styles.card_header_left}>
             <Master />
-            <Text style={[styles.card_head]}>Credit/Debit Card</Text>
+            <Text style={[styles.card_head, {color:theme.color}]}>Credit/Debit Card</Text>
           </View>
-          <CheckCircle size={24} color="#241353" checked={checked} onPress={handlePress} />
+          <CheckCircle size={24} color="#007BFF" checked={checked} onPress={handlePress} />
         </View>
         <TouchableOpacity style={styles.card_box}>
           <Image source={Card} alt='card' style={styles.image} />
@@ -82,7 +84,7 @@ const back = () => {
         <View style={styles.pay_tab_container}>
           {
             pay_card.map((d, index) => (
-              <TouchableOpacity style={[styles.tab]} key={d.id} onPress={() => handlePress1(index)}>
+              <TouchableOpacity style={[styles.tab, {backgroundColor:theme.cardbg}]} key={d.id} onPress={() => handlePress1(index)}>
                 <View style={styles.tab_left}>
                   {d.icon}
                   <Text style={styles.tab_text}>{d.text}</Text>
@@ -101,16 +103,16 @@ const back = () => {
                 onRequestClose={() => setIsModalVisible(false)}
             >
                      <View style={styles.modalOverlay}>
-                        <View style={[styles.modalContent]}>
+                        <View style={[styles.modalContent, {backgroundColor:theme.background}]}>
                         <View style={styles.modal_header}>
                                 <TouchableOpacity onPress={() => setIsModalVisible(false)}>
-                                <Back />
+                               {darkMode? <Dark_back /> : <Back />}
                                 </TouchableOpacity>
                             </View>
                             <View style={styles.image_box}>
                                 <Tick />
                             </View>
-                            <Text style={[styles.modal_heading]}>Payment Success</Text>
+                            <Text style={[styles.modal_heading, {color:theme.color}]}>Payment Success</Text>
                             <Text style={styles.modal_description}>Ticket Payment, for the movie has been successful, Thank You!</Text>
                            <Button buttonText="Go to Homepage" onPress={login}  />
                             </View>

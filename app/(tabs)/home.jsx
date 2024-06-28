@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity, TextInput, ScrollView, Image } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, ScrollView, Image, StatusBar  } from 'react-native';
 import React, { useContext, useState } from 'react';
 import Black from "../../assets/images/black_location.svg";
 import Notification from "../../assets/images/Notification.svg";
@@ -14,7 +14,7 @@ import Car from "../../assets/images/car.svg";
 import Clock from "../../assets/images/clock.svg";
 import { router, Link } from "expo-router";
 import ThemeContext from '../../theme/ThemeContext';
-
+import Dark_Locate from "../../assets/images/dark_locate2.svg";
 
 const Home = () => {
   const { theme, darkMode, toggleTheme } = useContext(ThemeContext);
@@ -34,13 +34,18 @@ const details = () => {
   router.push('parking_details');
 };
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {backgroundColor: theme.background}]}>
+        <StatusBar 
+        translucent
+        backgroundColor="transparent"
+        barStyle={darkMode ? "light-content" : "dark-content"} 
+      />
       <View style={styles.header}>
         <View style={styles.header_content}>
             <Text style={styles.location}>location</Text>
             <View style={styles.header_content_bottom}>
-                <Black />
-                <Text style={styles.heading}>New York, USA</Text>
+               { darkMode? <Dark_Locate /> : <Black />}
+                <Text style={[styles.heading, {color: theme.color}]}>New York, USA</Text>
             </View>
         </View>
         <TouchableOpacity style={styles.notification}>
@@ -52,19 +57,19 @@ const details = () => {
         <View style={styles.search}>
           <Search  />
         </View>
-        <TextInput style={[styles.input]} placeholder='Search' />
+        <TextInput style={[styles.input, {backgroundColor: theme.cardbg, color: theme.color}]} placeholder='Search' />
         <View style={styles.mic}>
             <Mic />
         </View>
       </View>
       <View style={styles.row}>
-        <Text style={styles.row_heading}>Popular Parking</Text>
+        <Text style={[styles.row_heading, {color:theme.color}]}>Popular Parking</Text>
         <Text style={styles.view}>see all</Text>
       </View>
       <ScrollView horizontal={true} style={styles.horizontal_scroll}>
         <View style={styles.popular_container}>
           {popular.map((d) => (
-            <TouchableOpacity style={styles.popular_box} key={d.id} onPress={details}>
+            <TouchableOpacity style={[styles.popular_box, {backgroundColor:theme.cardbg}]} key={d.id} onPress={details}>
               <Image source={d.image} alt='image' style={styles.image} />
               <View style={styles.top_row}>
                 <View style={styles.rating_row}>
@@ -78,17 +83,17 @@ const details = () => {
               <View style={styles.card_body}>
                 <Text style={styles.parking}>{d.parking}</Text>
                 <View style={styles.name_price}>
-                  <Text style={styles.name}>{d.name}</Text>
+                  <Text style={[styles.name, {color:theme.color}]}>{d.name}</Text>
                   <Text style={styles.price}>{d.price}<Text style={styles.time}>{d.timing}</Text></Text>
                 </View>
                 <View style={styles.timing_car}>
                   <View style={styles.timing_row}>
                     <Clock />
-                    <Text style={styles.timing}>{d.timing2}</Text>
+                    <Text style={[styles.timing, {color:theme.color}]}>{d.timing2}</Text>
                   </View>
                   <View style={styles.car_row}>
                     <Car />
-                    <Text style={styles.car}>{d.vehicle}</Text>
+                    <Text style={[styles.car, {color:theme.color}]}>{d.vehicle}</Text>
                   </View>
                 </View>
               </View>
@@ -97,13 +102,13 @@ const details = () => {
         </View>
       </ScrollView>
       <View style={styles.row}>
-        <Text style={styles.row_heading}>Nearby Parking</Text>
+        <Text style={[styles.row_heading, {color:theme.color}]}>Nearby Parking</Text>
         <Text style={styles.view}>see all</Text>
       </View>
       <View style={styles.stack_container}>
         {
           popular.map((d) =>(
-            <TouchableOpacity style={styles.stack} key={d.id} onPress={details}>
+            <TouchableOpacity style={[styles.stack, {backgroundColor:theme.cardbg}]} key={d.id} onPress={details}>
               <Image source={d.image} style={styles.stack_img} alt='image' />
               <View style={styles.stack_body}>
                 <View style={styles.stack_body_row}>
@@ -114,17 +119,17 @@ const details = () => {
                 </View>
                 </View>
                 <View style={styles.name_price2}>
-                  <Text style={styles.name}>{d.name}</Text>
+                  <Text style={[styles.name, {color:theme.color}]}>{d.name}</Text>
                   <Text style={styles.price}>{d.price}<Text style={styles.time}>{d.timing}</Text></Text>
                 </View>
                 <View style={styles.timing_car2}>
                   <View style={styles.timing_row}>
                     <Clock />
-                    <Text style={styles.timing}>{d.timing2}</Text>
+                    <Text style={[styles.timing, {color:theme.color}]}>{d.timing2}</Text>
                   </View>
                   <View style={styles.car_row}>
                     <Car />
-                    <Text style={styles.car}>{d.vehicle}</Text>
+                    <Text style={[styles.car, {color:theme.color}]}>{d.vehicle}</Text>
                   </View>
                 </View>
               </View>

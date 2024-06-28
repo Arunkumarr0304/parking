@@ -1,7 +1,8 @@
 import { StyleSheet, Text, View, TouchableOpacity, Image, ScrollView } from 'react-native';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Parking1 from "../../assets/images/parking1.png";
 import Back from "../../assets/images/White_back.svg";
+import Dark_back from "../../assets/images/White_back.svg";
 import Star from "../../assets/images/Star.svg";
 import Car from "../../assets/images/car.svg";
 import Clock from "../../assets/images/clock.svg";
@@ -14,8 +15,10 @@ import Comment from "../../assets/images/comment.svg";
 import Call from "../../assets/images/call.svg";
 import Button from '../../components/Button/Button';
 import { router, Link } from "expo-router";
+import ThemeContext from '../../theme/ThemeContext';
 
 const Parking_details = () => {
+    const { theme, darkMode, toggleTheme } = useContext(ThemeContext);
     const [activeHeading, setActiveHeading] = useState(tab_heading[0].id);
 
     const click = (id) => {
@@ -25,14 +28,19 @@ const Parking_details = () => {
     const slot = () => {
         router.push('book_slot');
     };
-
+    const back = () => {
+        router.push('home');
+      };
+    
     return (
         <View style={styles.details_page}>
             <Image source={Parking1} alt='image' style={styles.image} />
             <View style={styles.header}>
+                <TouchableOpacity onPress={back}>
                 <Back />
+                </TouchableOpacity>
             </View>
-            <View style={styles.container}>
+            <View style={[styles.container, {backgroundColor: theme.background}]}>
                 <View style={styles.review_row}>
                     <Text style={styles.parking}>car parking</Text>
                     <View style={styles.rating_row}>
@@ -41,7 +49,7 @@ const Parking_details = () => {
                     </View>
                 </View>
                 <View style={styles.title_row}>
-                    <Text style={styles.title}>ParkSecure</Text>
+                    <Text style={[styles.title, {color:theme.color}]}>ParkSecure</Text>
                     <Share />
                 </View>
                 <Text style={styles.title_text}>1012 Ocean Avanue, New York, USA</Text>
@@ -70,21 +78,21 @@ const Parking_details = () => {
                     <View style={styles.timing_car}>
                         <View style={styles.timing_row}>
                             <Clock />
-                            <Text style={styles.timing}>1hour</Text>
+                            <Text style={[styles.timing, {color:theme.color}]}>1hour</Text>
                         </View>
                         <View style={styles.car_row}>
                             <Car />
-                            <Text style={styles.car}>28 Spots</Text>
+                            <Text style={[styles.car, {color:theme.color}]}>28 Spots</Text>
                         </View>
                     </View>
-                    <Text style={styles.description}>Description</Text>
+                    <Text style={[styles.description, {color:theme.color}]}>Description</Text>
                     <Text style={styles.description_text}>Welcome to Park Haven, the ultimate destination for secure, convenient, and affordable car parking. Whether you need a spot<Text style={styles.read}> Read more..</Text></Text>
-                    <Text style={styles.description}>Operated By</Text>
+                    <Text style={[styles.description, {color:theme.color}]}>Operated By</Text>
                     <View style={styles.profile_row}>
                         <View style={styles.profile_left}>
                             <Image style={styles.profile} source={Profiles} alt='profile' />
                             <View style={styles.name_role}>
-                                <Text style={styles.name}>Arun Kumar</Text>
+                                <Text style={[styles.name, {color:theme.color}]}>john mac</Text>
                                 <Text style={styles.role}>Operater</Text>
                             </View>
                         </View>
@@ -95,7 +103,7 @@ const Parking_details = () => {
                     </View>
                     <View style={styles.price_row}>
                         <View style={styles.price_content}>
-                            <Text style={styles.price_title}>Total Price</Text>
+                            <Text style={[styles.price_title, {color:theme.color}]}>Total Price</Text>
                             <Text style={styles.price}>$5.00 <Text style={styles.hour}> /1hr</Text></Text>
                         </View>
                         <Button buttonText="Book Slot" onPress={slot} />

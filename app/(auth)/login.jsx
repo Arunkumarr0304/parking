@@ -1,9 +1,10 @@
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, ScrollView, Modal } from 'react-native'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Montserrat_500Medium, Montserrat_700Bold } from '@expo-google-fonts/montserrat';
 import { Roboto_400Regular } from '@expo-google-fonts/roboto';
 import { router, Link } from "expo-router";
 import Back from "../../assets/images/Back.svg";
+import Dark_back from "../../assets/images/White_back.svg";
 import Mail from "../../assets/images/mail.svg";
 import Lock from "../../assets/images/lock.svg";
 import Open from "../../assets/images/eye-open.svg";
@@ -11,8 +12,10 @@ import Close from "../../assets/images/eye-close.svg";
 import Done from "../../assets/images/Done.svg";
 import Button from '../../components/Button/Button';
 import { log_methods } from '../../components/Data/Data';
+import ThemeContext from '../../theme/ThemeContext';
 
 const Login = () => {
+  const { theme, darkMode, toggleTheme } = useContext(ThemeContext);
   const [Passwordvisible, setPasswordvisible] = useState(false);
   const [Passwordvisible2, setPasswordvisible2] = useState(false);
   const [Passwordvisible3, setPasswordvisible3] = useState(false);
@@ -42,22 +45,22 @@ const Login = () => {
     router.push('location');
   };
   return (
-    <View style={styles.container}>
-      <Text style={styles.heading}>Login Account</Text>
+    <View style={[styles.container, {backgroundColor:theme.background}]}>
+      <Text style={[styles.heading, {color:theme.color}]}>Login Account</Text>
       <ScrollView showsVerticalScrollIndicator={false}>
       <Text style={styles.head_text}>Login to access your personalized music collection and playlists anytime, anywhere.</Text>
       <View style={styles.inputContainer}>
         <View style={styles.mail_inputBox}>
-          <Text style={styles.label}>Email Or Phone Number</Text>
+          <Text style={[styles.label, {color:theme.color}]}>Email Or Phone Number</Text>
           <View style={styles.inputWrapper}>
-            <TextInput style={styles.input} placeholder='minatonamikaze@gmail.com' />
+            <TextInput style={[styles.input, {backgroundColor:theme.cardbg, color:theme.color}]} placeholder='minatonamikaze@gmail.com' />
             <Mail style={styles.icon} />
           </View>
         </View>
         <View style={styles.inputBox}>
-          <Text style={styles.label}>Password</Text>
+          <Text style={[styles.label, {color:theme.color}]}>Password</Text>
           <View style={styles.inputWrapper}>
-            <TextInput style={styles.passwordInput} placeholder='Password' secureTextEntry={!Passwordvisible} />
+            <TextInput style={[styles.passwordInput, {backgroundColor:theme.cardbg, color:theme.color}]} placeholder='Password' secureTextEntry={!Passwordvisible} />
             <TouchableOpacity onPress={togglePasswordVisible} style={styles.eye}>
               {Passwordvisible ? <Open /> : <Close />}
             </TouchableOpacity>
@@ -75,12 +78,12 @@ const Login = () => {
           log_methods.map((d) => (
             <TouchableOpacity style={[styles.tab]} key={d.id}>
               {d.image}
-              <Text style={[styles.tab_text]}>{d.text}</Text>
+              <Text style={[styles.tab_text, {color:theme.color}]}>{d.text}</Text>
             </TouchableOpacity>
           ))
         }
       </View>
-      <Text style={[styles.bottom_text]}>Don’t have an account yet?<Link href='/create_account' style={styles.link} > Register</Link></Text>
+      <Text style={[styles.bottom_text, {color:theme.color}]}>Don’t have an account yet?<Link href='/create_account' style={styles.link} > Register</Link></Text>
       </ScrollView>
       <Modal
         transparent={true}
@@ -88,18 +91,18 @@ const Login = () => {
         onRequestClose={() => setModalvisible(false)}
       >
         <View style={styles.modalOverlay}>
-          <View style={[styles.modalContent]}>
+          <View style={[styles.modalContent, {backgroundColor:theme.background}]}>
             <View style={styles.modal_header}>
               <TouchableOpacity onPress={() => setModalvisible(false)}>
-                <Back />
+              {darkMode? <Dark_back /> :  <Back />}
               </TouchableOpacity>
-              <Text style={styles.heading}>Forgot Password</Text>
+              <Text style={[styles.heading, {color:theme.color}]}>Forgot Password</Text>
             </View>
             <Text style={styles.head_text}>Enter your email address below and we'll help you reset your password.</Text>
             <View style={styles.inputBox}>
-              <Text style={styles.label}>Email Or Phone Number</Text>
+              <Text style={[styles.label, {color:theme.color}]}>Email Or Phone Number</Text>
               <View style={styles.inputWrapper}>
-                <TextInput style={styles.input} placeholder='minatonamikaze@gmail.com' />
+                <TextInput style={[styles.input, {color:theme.color, backgroundColor:theme.cardbg}]} placeholder='minatonamikaze@gmail.com' />
                 <Mail style={styles.icon} />
                 <Done style={styles.done} />
               </View>
@@ -114,19 +117,19 @@ const Login = () => {
         onRequestClose={() => setModalvisible2(false)}
       >
         <View style={styles.modalOverlay}>
-          <View style={[styles.modalContent]}>
+          <View style={[styles.modalContent, {backgroundColor:theme.background}]}>
             <View style={styles.modal_header}>
               <TouchableOpacity onPress={() => setModalvisible2(false)}>
-                <Back />
+              {darkMode? <Dark_back /> :  <Back />}
               </TouchableOpacity>
-              <Text style={styles.modal_heading}>Create New Password</Text>
+              <Text style={[styles.modal_heading, {color:theme.color}]}>Create New Password</Text>
             </View>
             <Text style={styles.head_text}>Ensure your account's security with a strong, unique password.</Text>
             <View style={styles.inputContainer}>
               <View style={styles.inputBox2}>
-                <Text style={styles.label}>Password</Text>
+                <Text style={[styles.label, {color:theme.color}]}>Password</Text>
                 <View style={styles.inputWrapper}>
-                  <TextInput style={styles.passwordInput} placeholder='Password' secureTextEntry={!Passwordvisible2} />
+                  <TextInput style={[styles.passwordInput, {backgroundColor:theme.cardbg, color:theme.color}]} placeholder='Password' secureTextEntry={!Passwordvisible2} />
                   <TouchableOpacity onPress={togglePasswordVisible2} style={styles.eye}>
                     {Passwordvisible2 ? <Open /> : <Close />}
                   </TouchableOpacity>
@@ -134,9 +137,9 @@ const Login = () => {
                 </View>
               </View>
               <View style={styles.inputBox3}>
-                <Text style={styles.label}>confirm Password</Text>
+                <Text style={[styles.label, {color:theme.color}]}>confirm Password</Text>
                 <View style={styles.inputWrapper}>
-                  <TextInput style={styles.passwordInput} placeholder='Password' secureTextEntry={!Passwordvisible3} />
+                  <TextInput style={[styles.passwordInput, {backgroundColor:theme.cardbg, color:theme.color}]} placeholder='Password' secureTextEntry={!Passwordvisible3} />
                   <TouchableOpacity onPress={togglePasswordVisible3} style={styles.eye}>
                     {Passwordvisible3 ? <Open /> : <Close />}
                   </TouchableOpacity>

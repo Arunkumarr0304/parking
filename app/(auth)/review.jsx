@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView } from 'react-native';
-import React from 'react';
+import React, { useContext } from 'react';
 import Back from "../../assets/images/Back.svg";
+import Dark_back from "../../assets/images/White_back.svg";
 import Button from '../../components/Button/Button';
 import { Roboto_400Regular, Roboto_500Medium, Roboto_700Bold } from '@expo-google-fonts/roboto';
 import { router, Link } from "expo-router";
@@ -13,21 +14,27 @@ import Car from "../../assets/images/car.svg";
 import Clock from "../../assets/images/clock.svg";
 import Parking1 from "../../assets/images/parking1.png";
 import Location from "../../assets/images/black_location.svg";
+import ThemeContext from '../../theme/ThemeContext';
+import Dark_Locate from "../../assets/images/dark_locate2.svg";
 
 const Review = () => {
-
+  const { theme, darkMode, toggleTheme } = useContext(ThemeContext);
     const pay = () => {
       router.push('payment');
     };   
-
+    const back = () => {
+      router.push('parking_slot');
+    };
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {backgroundColor:theme.background}]}>
         <View style={styles.header}>
-            <Back />
-            <Text style={styles.heading}>Review Summary</Text>
+        <TouchableOpacity onPress={back}>
+       {darkMode? <Dark_back /> :  <Back />}
+       </TouchableOpacity>
+            <Text style={[styles.heading, {color:theme.color}]}>Review Summary</Text>
         </View>
         <ScrollView showsVerticalScrollIndicator={false}>
-        <TouchableOpacity style={styles.stack} >
+        <TouchableOpacity style={[styles.stack, {backgroundColor:theme.cardbg}]} >
               <Image source={Parking1} style={styles.stack_img} alt='image' />
               <View style={styles.stack_body}>
                 <View style={styles.stack_body_row}>
@@ -38,17 +45,17 @@ const Review = () => {
                 </View>
                 </View>
                 <View style={styles.name_price2}>
-                  <Text style={styles.name}>ParkSecure</Text>
+                  <Text style={[styles.name, {color:theme.color}]}>ParkSecure</Text>
                   <Text style={styles.price}>$5.00<Text style={styles.time}>/1hr</Text></Text>
                 </View>
                 <View style={styles.row2}>
-                  <Location />
+                {darkMode? <Dark_Locate /> :  <Location />}
                   <Text style={styles.location}>New York, USA</Text>
                 </View>
               </View>
             </TouchableOpacity>
-            <View style={styles.receipt}>
-            <Text style={styles.title}>your booking</Text>
+            <View style={[styles.receipt, {backgroundColor:theme.cardbg}]}>
+            <Text style={[styles.title, {color:theme.color}]}>your booking</Text>
             <View style={styles.review_container}>
               {
                 review_data.map((d) => (
@@ -57,13 +64,13 @@ const Review = () => {
                       {d.icon}
                       <Text style={styles.text}>{d.text}</Text>
                     </View>
-                    <Text style={styles.value}>{d.value}</Text>
+                    <Text style={[styles.value, {color:theme.color}]}>{d.value}</Text>
                   </View>
                 ))
               }
             </View>
               <View style={styles.hr}></View>
-            <Text style={styles.title}>your booking</Text>
+            <Text style={[styles.title, {color:theme.color}]}>your booking</Text>
             <View style={styles.review_container}>
               {
                 review_data2.map((d) => (
@@ -71,15 +78,15 @@ const Review = () => {
                     <View style={styles.left_row}>
                       <Text style={styles.text}>{d.text}</Text>
                     </View>
-                    <Text style={styles.value}>{d.value}</Text>
+                    <Text style={[styles.value, {color:theme.color}]}>{d.value}</Text>
                   </View>
                 ))
               }
             </View>
             <View style={styles.hr}></View>
              <View style={styles.review_row}>
-              <Text style={styles.value}>Total Price</Text>
-              <Text style={styles.value}>$64.50</Text>
+              <Text style={[styles.value, {color:theme.color}]}>Total Price</Text>
+              <Text style={[styles.value, {color:theme.color}]}>$64.50</Text>
              </View>
              </View>
              <View style={styles.button_box}>

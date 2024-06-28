@@ -1,13 +1,16 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput } from 'react-native';
-import React from 'react';
+import React, { useContext } from 'react';
 import Locations from "../../assets/images/location.png";
 import { Montserrat_700Bold } from '@expo-google-fonts/montserrat';
 import { Roboto_400Regular } from '@expo-google-fonts/roboto';
 import Button from '../../components/Button/Button';
 import { router, Link } from "expo-router";
+import ThemeContext from '../../theme/ThemeContext';
+import Back from "../../assets/images/Back.svg";
+import Dark_back from "../../assets/images/White_back.svg";
 
 const Location = () => {
-
+    const { theme, darkMode, toggleTheme } = useContext(ThemeContext);
     const home = () => {
         router.push('home');
     };
@@ -15,8 +18,10 @@ const Location = () => {
     const manual = () => {
         router.push('manual_location');
     }
+   
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {backgroundColor:theme.background}]}>
+       
         <View style={styles.content}>
             <Image source={Locations} alt='location' style={styles.image} />
             <Text style={styles.content_heading}>What is Your Location</Text>
@@ -36,6 +41,7 @@ const styles = StyleSheet.create({
     container: {
         paddingHorizontal: 20,
         paddingTop: 50,
+        paddingBottom: 200,
     },
     content: {
         alignItems: 'center',

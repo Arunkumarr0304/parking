@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, TextInput, ScrollView } from 'react-native';
 import { useFonts } from 'expo-font';
 import { Montserrat_500Medium, Montserrat_700Bold } from '@expo-google-fonts/montserrat';
@@ -11,8 +11,10 @@ import Close from "../../assets/images/eye-close.svg";
 import Button from '../../components/Button/Button';
 import { log_methods } from '../../components/Data/Data';
 import { router, Link } from "expo-router";
+import ThemeContext from '../../theme/ThemeContext';
 
 const CreateAccount = () => {
+    const { theme, darkMode, toggleTheme } = useContext(ThemeContext);
     const [Passwordvisible, setPasswordvisible] = useState(false);
 
 
@@ -25,29 +27,29 @@ const CreateAccount = () => {
     };
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.heading}>Create Account</Text>
+        <View style={[styles.container, {backgroundColor:theme.background}]}>
+            <Text style={[styles.heading, {color:theme.color}]}>Create Account</Text>
             <ScrollView showsVerticalScrollIndicator={false} style={styles.scroll}>
             <Text style={styles.headingText}>Create your account to unlock a personalized music experience tailored to your taste.</Text>
             <View style={styles.inputContainer}>
                 <View style={styles.inputBox}>
-                    <Text style={styles.label}>Username</Text>
+                    <Text style={[styles.label, {color:theme.color}]}>Username</Text>
                     <View style={styles.inputWrapper}>
-                        <TextInput style={styles.input} placeholder='Minato Namikaze' />
+                        <TextInput style={[styles.input, {backgroundColor:theme.cardbg, color:theme.color}]} placeholder='Minato Namikaze' />
                         <Person style={styles.icon} />
                     </View>
                 </View>
                 <View style={styles.inputBox}>
-                    <Text style={styles.label}>Email Or Phone Number</Text>
+                    <Text style={[styles.label, {color:theme.color}]}>Email Or Phone Number</Text>
                     <View style={styles.inputWrapper}>
-                        <TextInput style={styles.input} placeholder='minatonamikaze@gmail.com' />
+                        <TextInput style={[styles.input, {backgroundColor:theme.cardbg, color:theme.color}]} placeholder='minatonamikaze@gmail.com' />
                         <Mail style={styles.icon} />
                     </View>
                 </View>
                 <View style={styles.inputBox}>
-                    <Text style={styles.label}>Password</Text>
+                    <Text style={[styles.label, {color:theme.color}]}>Password</Text>
                     <View style={styles.inputWrapper}>
-                        <TextInput style={styles.passwordInput} placeholder='Password' secureTextEntry={!Passwordvisible} />
+                        <TextInput style={[styles.passwordInput, {backgroundColor:theme.cardbg, color:theme.color}]} placeholder='Password' secureTextEntry={!Passwordvisible} />
                         <TouchableOpacity onPress={togglePasswordVisible} style={styles.eye}>
                             {Passwordvisible ? <Open /> : <Close />}
                         </TouchableOpacity>
@@ -62,12 +64,12 @@ const CreateAccount = () => {
                 log_methods.map((d) => (
                     <TouchableOpacity style={[styles.tab]} key={d.id}>
                         {d.image}
-                        <Text style={[styles.tab_text]}>{d.text}</Text>
+                        <Text style={[styles.tab_text, {color:theme.color}]}>{d.text}</Text>
                     </TouchableOpacity>
                 ))
             }
         </View>
-        <Text style={[styles.bottom_text]}>Already have an account?<Link href='/login' style={styles.link} > Login</Link></Text>
+        <Text style={[styles.bottom_text, {color:theme.color}]}>Already have an account?<Link href='/login' style={styles.link} > Login</Link></Text>
         </ScrollView>
         </View>
     );

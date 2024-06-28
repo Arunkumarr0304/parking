@@ -1,7 +1,8 @@
 import { StyleSheet, Text, View, TouchableOpacity, Image, ScrollView } from 'react-native';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Parking1 from "../../assets/images/parking1.png";
 import Back from "../../assets/images/White_back.svg";
+import Dark_back from "../../assets/images/White_back.svg";
 import Star from "../../assets/images/Star.svg";
 import Share from "../../assets/images/Locate.svg";
 import { Montserrat_500Medium, Montserrat_600SemiBold } from '@expo-google-fonts/montserrat';
@@ -9,8 +10,10 @@ import CustomCalendar from '../../components/Custom_calendar/Custom_Calendar';
 import { time_tab } from '../../components/Data/Data';
 import Button from '../../components/Button/Button';
 import { router, Link } from "expo-router";
+import ThemeContext from '../../theme/ThemeContext';
 
 const Book_slot = () => {
+    const { theme, darkMode, toggleTheme } = useContext(ThemeContext);
     const [activetab, setActivetab] = useState(time_tab[0].id);
     const [activetab2, setActivetab2] = useState(time_tab[0].id);
 
@@ -25,13 +28,18 @@ const Book_slot = () => {
     const vehicle = () => {
         router.push('vehicle');
     }
+    const back = () => {
+        router.push('parking_details');
+      };
     return (
         <View style={styles.details_page}>
             <Image source={Parking1} alt='image' style={styles.image} />
             <View style={styles.header}>
-                <Back />
+            <TouchableOpacity onPress={back}>
+       {darkMode? <Dark_back /> :  <Back />}
+       </TouchableOpacity>
             </View>
-            <View style={styles.container}>
+            <View style={[styles.container, {backgroundColor:theme.background}]}>
                 <View style={styles.review_row}>
                     <Text style={styles.parking}>car parking</Text>
                     <View style={styles.rating_row}>
@@ -40,15 +48,15 @@ const Book_slot = () => {
                     </View>
                 </View>
                 <View style={styles.title_row}>
-                    <Text style={styles.title}>ParkSecure</Text>
+                    <Text style={[styles.title, {color:theme.color}]}>ParkSecure</Text>
                     <Share />
                 </View>
                 <Text style={styles.title_text}>1012 Ocean Avanue, New York, USA</Text>
                 <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollViewContent} showsVerticalScrollIndicator={false}>
                     <Text style={styles.book_title}>Book A Slot</Text>
-                    <Text style={styles.content_heading}>Day</Text>
+                    <Text style={[styles.content_heading, {color:theme.color}]}>Day</Text>
                     <CustomCalendar />
-                    <Text style={styles.content_heading}>Arriving Time</Text>
+                    <Text style={[styles.content_heading, {color:theme.color}]}>Arriving Time</Text>
                     <ScrollView horizontal={true}>
                         <View style={styles.time_container}>
                             {time_tab.map((d) => (
@@ -63,7 +71,7 @@ const Book_slot = () => {
                         </View>
                     </ScrollView>
 
-                    <Text style={styles.content_heading}>Exit Time</Text>
+                    <Text style={[styles.content_heading, {color:theme.color}]}>Exit Time</Text>
                     <ScrollView horizontal={true}>
                         <View style={styles.time_container}>
                             {time_tab.map((d) => (

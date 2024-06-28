@@ -1,14 +1,18 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView } from 'react-native';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Back from "../../assets/images/Back.svg";
+import Dark_back from "../../assets/images/White_back.svg";
 import Button from '../../components/Button/Button';
 import { Montserrat_700Bold } from '@expo-google-fonts/montserrat';
 import { router } from "expo-router";
 import Left from "../../assets/images/slot_left.png";
+import Dark_Left from "../../assets/images/dark_slot_left.png";
 import { parking_slot_data, parking_slot_data2, parking_slot_data3, parking_slot_data4 } from '../../components/Data/Data';
 import Divider from "../../assets/images/slot_divider.svg";
+import ThemeContext from '../../theme/ThemeContext';
 
 const Parking_slot = () => {
+    const { theme, darkMode, toggleTheme } = useContext(ThemeContext);
     const [activeSlot, setActiveSlot] = useState(null);
     const [activeSlot2, setActiveSlot2] = useState(null);
     const [activeSlot3, setActiveSlot3] = useState(null);
@@ -33,23 +37,27 @@ const Parking_slot = () => {
     const handleSlotPress4 = (id) => {
         setActiveSlot4(prevId => prevId === id ? null : id);
     };
-
+    const back = () => {
+        router.push('vehicle');
+      };
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, {backgroundColor:theme.background}]}>
             <View style={styles.header}>
-                <Back />
-                <Text style={styles.heading}>Select Parking Slot</Text>
+            <TouchableOpacity onPress={back}>
+       {darkMode? <Dark_back /> :  <Back />}
+       </TouchableOpacity>
+                <Text style={[styles.heading, {color:theme.color}]}>Select Parking Slot</Text>
             </View>
             <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={styles.parking_slot}>
-                    <Image source={Left} style={styles.slot_left} />
+                  { darkMode? <Image source={Dark_Left} style={styles.slot_left} alt='image' /> :  <Image source={Left} style={styles.slot_left} alt='image' />}
                     <View style={styles.slots}>
                         <View style={styles.row1}>
                             <View style={styles.column1}>
                                 {parking_slot_data.map((d) => (
                                     <TouchableOpacity
                                         style={[
-                                            styles.park,
+                                            [styles.park, {backgroundColor:theme.cardbg}],
                                             typeof d.parking === 'string' && d.id === activeSlot && styles.activePark
                                         ]}
                                         key={d.id}
@@ -72,7 +80,7 @@ const Parking_slot = () => {
                                 {parking_slot_data2.map((d) => (
                                     <TouchableOpacity
                                         style={[
-                                            styles.park2,
+                                            [styles.park2, {backgroundColor:theme.cardbg}],
                                             typeof d.parking === 'string' && d.id === activeSlot2 && styles.activePark
                                         ]}
                                         key={d.id}
@@ -100,7 +108,7 @@ const Parking_slot = () => {
                                 {parking_slot_data3.map((d) => (
                                     <TouchableOpacity
                                         style={[
-                                            styles.park,
+                                           [ styles.park, {backgroundColor:theme.cardbg}],
                                             typeof d.parking === 'string' && d.id === activeSlot3 && styles.activePark
                                         ]}
                                         key={d.id}
@@ -123,7 +131,7 @@ const Parking_slot = () => {
                                 {parking_slot_data4.map((d) => (
                                     <TouchableOpacity
                                         style={[
-                                            styles.park2,
+                                          [  styles.park2, {backgroundColor:theme.cardbg}],
                                             typeof d.parking === 'string' && d.id === activeSlot4 && styles.activePark
                                         ]}
                                         key={d.id}

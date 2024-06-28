@@ -1,28 +1,40 @@
 import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity } from 'react-native';
-import React from 'react';
+import React, { useContext } from 'react';
 import Back from '../../assets/images/Back.svg';
+import Dark_back from "../../assets/images/White_back.svg";
 import { Montserrat_700Bold } from '@expo-google-fonts/montserrat';
 import { receipt_data, receipt_data2, receipt_data3 } from '../../components/Data/Data';
 import Scan from "../../assets/images/scan_code.png";
+import Dark_scan from "../../assets/images/dark_scan.png";
 import Button from '../../components/Button/Button';
+import ThemeContext from '../../theme/ThemeContext';
+import { router, Link } from "expo-router";
 
 const Receipt = () => {
+  const { theme, darkMode, toggleTheme } = useContext(ThemeContext);
+
+  const back = () => {
+    router.push('booking');
+  };
+
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {backgroundColor:theme.background}]}>
         <View style={styles.header}>
-            <Back />
-            <Text style={styles.heading}>E-Receipt</Text>
+        <TouchableOpacity onPress={back}>
+       {darkMode? <Dark_back /> :  <Back />}
+       </TouchableOpacity>
+            <Text style={[styles.heading, {color:theme.color}]}>E-Receipt</Text>
         </View>
         <ScrollView showsVerticalScrollIndicator={false} style={styles.scrollView}>
-          <View style={styles.receipt}>
-            <Text style={styles.title}>Your Booking</Text>
+          <View style={[styles.receipt,{backgroundColor:theme.cardbg}]}>
+            <Text style={[styles.title, {color:theme.color}]}>Your Booking</Text>
             <View style={styles.review_container}>
               {receipt_data2.map((d) => (
                 <View style={styles.review_row} key={d.id}>
                   <View style={styles.left_row}>
                     <Text style={styles.text}>{d.text}</Text>
                   </View>
-                  <Text style={styles.value}>{d.value}</Text>
+                  <Text style={[styles.value, {color:theme.color}]}>{d.value}</Text>
                 </View>
               ))}
             </View>
@@ -34,24 +46,24 @@ const Receipt = () => {
                     {d.icon}
                     <Text style={styles.text}>{d.text}</Text>
                   </View>
-                  <Text style={styles.value}>{d.value}</Text>
+                  <Text style={[styles.value, {color:theme.color}]}>{d.value}</Text>
                 </View>
               ))}
             </View>
             <View style={styles.hr}></View>
-            <Text style={styles.title}>Price Details</Text>
+            <Text style={[styles.title, {color:theme.color}]}>Price Details</Text>
             <View style={styles.review_container}>
               {receipt_data3.map((d) => (
                 <View style={styles.review_row} key={d.id}>
                   <View style={styles.left_row}>
                     <Text style={styles.text}>{d.text}</Text>
                   </View>
-                  <Text style={styles.value}>{d.value}</Text>
+                  <Text style={[styles.value, {color:theme.color}]}>{d.value}</Text>
                 </View>
               ))}
             </View>
             <View style={styles.image_box}>
-              <Image source={Scan} alt='image' style={styles.scan} />
+              {darkMode? <Image source={Dark_scan} alt='image' style={styles.scan} /> : <Image source={Scan} alt='image' style={styles.scan} />}
             </View>
           </View>
           <View style={styles.button_box}>

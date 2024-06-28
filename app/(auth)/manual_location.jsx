@@ -1,34 +1,43 @@
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, ScrollView, Image } from 'react-native';
-import React from 'react';
+import React, { useContext } from 'react';
 import Back from "../../assets/images/Back.svg";
+import Dark_back from "../../assets/images/White_back.svg";
 import { router, Link } from "expo-router";
 import { Montserrat_700Bold } from '@expo-google-fonts/montserrat';
 import Search from "../../assets/images/search.svg";
 import Locate from "../../assets/images/Locate.svg";
 import { Roboto_400Regular, Roboto_500Medium } from '@expo-google-fonts/roboto';
+import ThemeContext from '../../theme/ThemeContext';
 
 const Manual = () => {
+  const { theme, darkMode, toggleTheme } = useContext(ThemeContext);
+
+  const back = () => {
+    router.push('location');
+  };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {backgroundColor:theme.background}]}>
       <View style={styles.header}>
-        <Back />
-        <Text style={styles.heading}>Enter Your Location</Text>
+      <TouchableOpacity onPress={back}>
+       {darkMode? <Dark_back /> :  <Back />}
+       </TouchableOpacity>
+        <Text style={[styles.heading, {color:theme.color}]}>Enter Your Location</Text>
       </View>
       <View style={styles.input_container}>
         <View style={styles.search}>
           <Search  />
           </View>
-        <TextInput style={[styles.input]} placeholder='Search' />
+        <TextInput style={[styles.input, {backgroundColor:theme.cardbg, color:theme.color}]} placeholder='Search' />
       </View>
       <View style={styles.current_row}>
         <Locate />
-        <Text style={styles.current_location}>Use my current Location</Text>
+        <Text style={[styles.current_location, {color:theme.color}]}>Use my current Location</Text>
       </View>
       <Text style={styles.result}>Search Result</Text>
       <View style={styles.row}>
         <Locate />
-        <Text style={styles.location_head}>Golden Avenue</Text>
+        <Text style={[styles.location_head, {color:theme.color}]}>Golden Avenue</Text>
         
       </View>
       <Text style= {styles.location}>5484 preston Rd. Ingl..</Text>

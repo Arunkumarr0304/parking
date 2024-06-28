@@ -1,14 +1,17 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput, ScrollView, Modal } from 'react-native';
-import React, {useRef, useState} from 'react';
+import React, {useContext, useRef, useState} from 'react';
 import Back from "../../assets/images/Back.svg";
+import Dark_back from "../../assets/images/White_back.svg";
 import { Montserrat_700Bold } from '@expo-google-fonts/montserrat';
 import Verify from "../../assets/images/Verify.png";
 import { Roboto_400Regular, Roboto_500Medium } from '@expo-google-fonts/roboto';
 import Button from '../../components/Button/Button';
 import { router, Link } from "expo-router";
 import Tick from "../../assets/images/Tick.png";
+import ThemeContext from '../../theme/ThemeContext';
 
 const Verification = () => {
+    const { theme, darkMode, toggleTheme } = useContext(ThemeContext);
     const otpInputs = useRef([]);
     const [otp, setOtp] = useState(['', '', '', '']);
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -45,22 +48,27 @@ const Verification = () => {
     const location = () => {
         router.push('location');
     };
+    const back = () => {
+        router.push('create_account');
+      };
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {backgroundColor:theme.background}]}>
       <View style={styles.header}>
-        <Back />
-        <Text style={styles.heading}>verification</Text>
+      <TouchableOpacity onPress={back}>
+       {darkMode? <Dark_back /> :  <Back />}
+       </TouchableOpacity>
+        <Text style={[styles.heading, {color:theme.color}]}>verification</Text>
       </View>
       <View style={styles.content}>
         <Image source={Verify} alt='image' style={styles.image} />
-        <Text style={styles.content_heading}>Verification Code</Text>
+        <Text style={[styles.content_heading, {color:theme.color}]}>Verification Code</Text>
         <Text style={styles.content_text}>We have sent the code verification to </Text>
-        <Text style={styles.mail}>minatonami****@gmail.com</Text>
+        <Text style={[styles.mail, {color:theme.color}]}>minatonami****@gmail.com</Text>
         <View style={styles.otp_block}>
                 {otp.map((digit, index) => (
                     <TextInput
                         key={index}
-                        style={[styles.input]}
+                        style={[styles.input, {color:theme.color}]}
                         maxLength={1}
                         keyboardType="numeric"
                         onChangeText={(value) => handleOtpChange(index, value)}
@@ -72,7 +80,7 @@ const Verification = () => {
             </View>
       </View>
       <Button buttonText="continue" onPress={continues} />
-      <Text style={[styles.bottom_text]}>Didn’t receive the code?<Link href="/verification" style={styles.link}> Resend</Link></Text>
+      <Text style={[styles.bottom_text, {color:theme.color}]}>Didn’t receive the code?<Link href="/verification" style={styles.link}> Resend</Link></Text>
       <Modal
                 transparent={true}
                 visible={isModalVisible}

@@ -1,14 +1,17 @@
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Back from "../../assets/images/Back.svg";
+import Dark_back from "../../assets/images/White_back.svg";
 import Add from "../../assets/images/add.svg";
 import { Montserrat_400Regular, Montserrat_700Bold } from '@expo-google-fonts/montserrat';
 import { vehicle_data } from '../../components/Data/Data';
 import CheckCircle from "../../components/Check_Circle/Check_Circle";
 import Button from '../../components/Button/Button';
 import { router, Link } from "expo-router";
+import ThemeContext from '../../theme/ThemeContext';
 
 const Vehicle = () => {
+  const { theme, darkMode, toggleTheme } = useContext(ThemeContext);
   const [checkedStates, setCheckedStates] = useState(Array(vehicle_data.length).fill(false));
 
   const handlePress1 = (index) => {
@@ -19,24 +22,29 @@ const Vehicle = () => {
   const slot = () => {
     router.push('parking_slot');
   };
+  const back = () => {
+    router.push('book_slot');
+  };
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {backgroundColor:theme.background}]}>
       <View style={styles.header}>
         <View style={styles.header_left}>
-          <Back />
-          <Text style={styles.heading}>Select Vehicle</Text>
+        <TouchableOpacity onPress={back}>
+       {darkMode? <Dark_back /> :  <Back />}
+       </TouchableOpacity>
+          <Text style={[styles.heading, {color:theme.color}]}>Select Vehicle</Text>
         </View>
         <Add />
       </View>
       <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
         <View style={styles.stack_container}>
           {vehicle_data.map((d, index) => (
-            <TouchableOpacity style={styles.stack} key={d.id} onPress={() => handlePress1(index)}>
+            <TouchableOpacity style={[styles.stack, {backgroundColor:theme.cardbg}]} key={d.id} onPress={() => handlePress1(index)}>
               {d.image}
               <View style={styles.stack_content}>
                 <View style={styles.stack_content_left}>
-                  <Text style={styles.company}>{d.company}</Text>
-                  <Text style={styles.modal}>{d.modal}<Text style={styles.modal_no}> . {d.modalno}</Text></Text>
+                  <Text style={[styles.company, {color:theme.color}]}>{d.company}</Text>
+                  <Text style={styles.modal}>{d.modal}<Text style={[styles.modal_no, {color:theme.color}]}> . {d.modalno}</Text></Text>
                 </View>
                 <CheckCircle
                   size={24}

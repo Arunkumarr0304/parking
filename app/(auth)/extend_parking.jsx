@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Image } from 'react-native';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Back from "../../assets/images/Back.svg";
+import Dark_back from "../../assets/images/White_back.svg";
 import { Montserrat_600SemiBold, Montserrat_700Bold } from '@expo-google-fonts/montserrat';
 import { extend_data, pay_card } from '../../components/Data/Data';
 import CheckCircle from '../../components/Check_Circle/Check_Circle';
@@ -8,8 +9,10 @@ import Wallet from "../../assets/images/pink_wallet.svg";
 import Card from "../../assets/images/card_icon.svg";
 import { router, Link } from "expo-router";
 import Button from '../../components/Button/Button';
+import ThemeContext from '../../theme/ThemeContext';
 
 const Extend = () => {
+    const { theme, darkMode, toggleTheme } = useContext(ThemeContext);
     const [activetab2, setActivetab2] = useState(extend_data[0].id);
     const [checkedStates, setCheckedStates] = useState(Array(pay_card.length).fill(false));
 
@@ -30,19 +33,23 @@ const Extend = () => {
     const card = () => {
         router.push('review');
     };
-
+    const back = () => {
+        router.push('timer');
+      };
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, {backgroundColor:theme.background}]}>
             <View style={styles.header}>
-                <Back />
-                <Text style={styles.heading}>Extend Parking Time</Text>
+            <TouchableOpacity onPress={back}>
+       {darkMode? <Dark_back /> :  <Back />}
+       </TouchableOpacity>
+                <Text style={[styles.heading, {color:theme.color}]}>Extend Parking Time</Text>
             </View>
-            <Text style={styles.time_heading}>Extend Time</Text>
+            <Text style={[styles.time_heading, {color:theme.color}]}>Extend Time</Text>
             <ScrollView horizontal={true}>
                 <View style={styles.time_container}>
                     {extend_data.map((d) => (
                         <TouchableOpacity
-                            style={[styles.tab, activetab2 === d.id && styles.activetab]}
+                            style={[[styles.tab, {backgroundColor:theme.cardbg}], activetab2 === d.id && styles.activetab]}
                             onPress={() => set_tab2(d.id)}
                             key={d.id}
                         >
@@ -54,8 +61,8 @@ const Extend = () => {
             </ScrollView>
             <View style={styles.option_box_container}>
                 <View style={styles.option_box}>
-                    <Text style={styles.title}>Wallet</Text>
-                    <TouchableOpacity style={[styles.tab]} onPress={wallet} >
+                    <Text style={[styles.title, {color:theme.color}]}>Wallet</Text>
+                    <TouchableOpacity style={[styles.tab, {backgroundColor:theme.cardbg}]} onPress={wallet} >
                         <View style={styles.tab_left}>
                             <Wallet />
                             <Text style={styles.tab_text}>Wallet</Text>
@@ -64,8 +71,8 @@ const Extend = () => {
                     </TouchableOpacity>
                 </View>
                 <View style={styles.option_box}>
-                    <Text style={styles.title}>Credit & Debit Card</Text>
-                    <TouchableOpacity style={[styles.tab]} onPress={card} >
+                    <Text style={[styles.title, {color:theme.color}]}>Credit & Debit Card</Text>
+                    <TouchableOpacity style={[styles.tab, {backgroundColor:theme.cardbg}]} onPress={card} >
                         <View style={styles.tab_left}>
                             <Card />
                             <Text style={styles.tab_text}>Add Card</Text>
@@ -74,11 +81,11 @@ const Extend = () => {
                     </TouchableOpacity>
                 </View>
             </View>
-            <Text style={styles.title}>More Payment Option</Text>
+            <Text style={[styles.title, {color:theme.color}]}>More Payment Option</Text>
             <View style={styles.pay_tab_container}>
                 {
                     pay_card.map((d, index) => (
-                        <TouchableOpacity style={[styles.tab]} key={d.id} onPress={() => handlePress1(index)}>
+                        <TouchableOpacity style={[styles.tab, {backgroundColor:theme.cardbg}]} key={d.id} onPress={() => handlePress1(index)}>
                             <View style={styles.tab_left}>
                                 {d.icon}
                                 <Text style={styles.tab_text}>{d.text}</Text>
