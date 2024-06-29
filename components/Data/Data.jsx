@@ -4,6 +4,7 @@ import Onboard3 from "../../assets/images/onboard_img3.png";
 
 import Google from "../../assets/images/Google.svg";
 import Apple from "../../assets/images/Apple.svg";
+import Dark_Apple from "../../assets/images/Dark_Apple.svg";
 
 import Parking1 from "../../assets/images/parking1.png";
 import Parking2 from "../../assets/images/parking2.png";
@@ -67,11 +68,13 @@ export const log_methods = [
     {
         id: 1,
         image: <Google />, 
+        dark_image: <Google />,
         text: 'Sign Up with Google',
     },
     {
         id: 2,
         image: <Apple />, 
+        dark_image: <Dark_Apple />,
         text: 'Sign Up with Apple',
     },
 ]

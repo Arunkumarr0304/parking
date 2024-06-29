@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Image } from 'react-native';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Back from "../../assets/images/Back.svg";
 import { Montserrat_600SemiBold, Montserrat_700Bold } from '@expo-google-fonts/montserrat';
 import { Roboto_400Regular, Roboto_500Medium, Roboto_700Bold } from '@expo-google-fonts/roboto';
@@ -15,10 +15,19 @@ import ThemeContext from '../../theme/ThemeContext';
 import Locate from "../../assets/images/locate2.svg";
 import Dark_Locate from "../../assets/images/dark_locate2.svg";
 
+
 const Favourite = () => {
 
   const { theme, darkMode, toggleTheme } = useContext(ThemeContext);
+  const [wishlist, setWishlist] = useState([]);
 
+  const toggleWishlist = (id) => {
+    if (wishlist.includes(id)) {
+      setWishlist(wishlist.filter(item => item !== id));
+    } else {
+      setWishlist([...wishlist, id]);
+    }
+  };
   const back = () => {
     router.push('home');
   };
@@ -42,6 +51,9 @@ const Favourite = () => {
             <TouchableOpacity style={[styles.stack, {backgroundColor: theme.cardbg}]} key={d.id} onPress={details}>
               <View style={styles.stack_inner}>
               <Image source={d.image} style={styles.stack_img} alt='image' />
+              <TouchableOpacity onPress={() => toggleWishlist(d.id)} style={styles.wishlist_container}>
+                  {wishlist.includes(d.id) ? <HeartFilled /> : <Heart />}
+                </TouchableOpacity>
               <View style={styles.stack_body}>
                 <View style={styles.stack_body_row}>
                 <Text style={styles.parking}>{d.parking}</Text>
@@ -228,6 +240,12 @@ stack_img: {
   width: 100,
   height: 100,
   borderRadius: 10,
+  position: 'relative',
+},
+wishlist_container: {
+  position: 'absolute',
+  top: 10,
+  left: 70,
 },
 stack_body: {
   paddingLeft: 10,

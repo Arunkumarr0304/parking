@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, TextInput, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, ScrollView, StatusBar } from 'react-native';
 import { useFonts } from 'expo-font';
 import { Montserrat_500Medium, Montserrat_700Bold } from '@expo-google-fonts/montserrat';
 import { Roboto_400Regular } from '@expo-google-fonts/roboto';
@@ -28,6 +28,11 @@ const CreateAccount = () => {
 
     return (
         <View style={[styles.container, {backgroundColor:theme.background}]}>
+              <StatusBar 
+        translucent
+        backgroundColor="transparent"
+        barStyle={darkMode ? "light-content" : "dark-content"} 
+      />
             <Text style={[styles.heading, {color:theme.color}]}>Create Account</Text>
             <ScrollView showsVerticalScrollIndicator={false} style={styles.scroll}>
             <Text style={styles.headingText}>Create your account to unlock a personalized music experience tailored to your taste.</Text>
@@ -63,7 +68,7 @@ const CreateAccount = () => {
             {
                 log_methods.map((d) => (
                     <TouchableOpacity style={[styles.tab]} key={d.id}>
-                        {d.image}
+                        {darkMode? d.dark_image : d.image}
                         <Text style={[styles.tab_text, {color:theme.color}]}>{d.text}</Text>
                     </TouchableOpacity>
                 ))

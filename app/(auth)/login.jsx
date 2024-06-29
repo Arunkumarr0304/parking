@@ -77,7 +77,7 @@ const Login = () => {
         {
           log_methods.map((d) => (
             <TouchableOpacity style={[styles.tab]} key={d.id}>
-              {d.image}
+              {darkMode? d.dark_image : d.image}
               <Text style={[styles.tab_text, {color:theme.color}]}>{d.text}</Text>
             </TouchableOpacity>
           ))

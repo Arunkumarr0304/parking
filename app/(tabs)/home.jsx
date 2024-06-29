@@ -19,6 +19,7 @@ import Dark_Locate from "../../assets/images/dark_locate2.svg";
 const Home = () => {
   const { theme, darkMode, toggleTheme } = useContext(ThemeContext);
   const [wishlist, setWishlist] = useState([]);
+  const [wishlist2, setWishlist2] = useState([]);
 
   const toggleWishlist = (id) => {
     if (wishlist.includes(id)) {
@@ -27,7 +28,13 @@ const Home = () => {
       setWishlist([...wishlist, id]);
     }
   };
-
+ const toggleWishlist2 = (id) => {
+    if (wishlist2.includes(id)) {
+      setWishlist2(wishlist2.filter(item => item !== id));
+    } else {
+      setWishlist2([...wishlist2, id]);
+    }
+  };
   
   console.log(popular);
 const details = () => {
@@ -110,6 +117,9 @@ const details = () => {
           popular.map((d) =>(
             <TouchableOpacity style={[styles.stack, {backgroundColor:theme.cardbg}]} key={d.id} onPress={details}>
               <Image source={d.image} style={styles.stack_img} alt='image' />
+              <TouchableOpacity onPress={() => toggleWishlist2(d.id)} style={styles.wishlist_container2}>
+                  {wishlist2.includes(d.id) ? <HeartFilled /> : <Heart />}
+                </TouchableOpacity>
               <View style={styles.stack_body}>
                 <View style={styles.stack_body_row}>
                 <Text style={styles.parking}>{d.parking}</Text>
@@ -374,6 +384,12 @@ const styles = StyleSheet.create({
       width: 100,
       height: 100,
       borderRadius: 10,
+      position:'relative',
+    },
+    wishlist_container2: {
+      position: 'absolute',
+      top: 20,
+      left: 80,
     },
     stack_body: {
       paddingLeft: 10,

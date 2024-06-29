@@ -87,17 +87,17 @@ const Verification = () => {
                 onRequestClose={() => setIsModalVisible(false)}
             >
                      <View style={styles.modalOverlay}>
-                        <View style={[styles.modalContent]}>
+                        <View style={[styles.modalContent, {backgroundColor:theme.background}]}>
                         <View style={styles.modal_header}>
                                 <TouchableOpacity onPress={() => setIsModalVisible(false)}>
-                                  <Back />
+                                {darkMode? <Dark_back /> :  <Back />}
                                 </TouchableOpacity>
                                 
                             </View>
                             <View style={styles.image_box2}>
                                 <Image source={Tick} alt='image' style={styles.Tick} />
                             </View>
-                            <Text style={[styles.modal_heading]}>Register Success</Text>
+                            <Text style={[styles.modal_heading, {color:theme.color}]}>Register Success</Text>
                             <Text style={styles.modal_description}>Congratulation your account already created. Please login to get amazing experience.</Text>
                            <Button buttonText="Continue" onPress={location} />
                             </View>

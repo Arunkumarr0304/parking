@@ -79,8 +79,8 @@ export default function App() {
   }
 
   return (
-    <SafeAreaView style={[styles.safearea, {backgroundColor:theme.background}]} onLayout={onLayoutRootView}>
-             <StatusBar 
+    <View style={[styles.safearea, {backgroundColor:theme.background}]} onLayout={onLayoutRootView}>
+        <StatusBar 
         translucent
         backgroundColor="transparent"
         barStyle={darkMode ? "light-content" : "dark-content"} 
@@ -136,7 +136,7 @@ export default function App() {
           )}
         </View>
       </View>
-    </SafeAreaView>
+    </View>
   );
 }
 
